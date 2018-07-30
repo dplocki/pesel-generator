@@ -1,3 +1,3 @@
 export function check_pesel(pesel) {
-  return true;
+  return pesel.length === 11;
 }
