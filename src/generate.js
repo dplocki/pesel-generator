@@ -1,3 +1,9 @@
+import { calculateControlDigit } from './pesel';
+
 export function generatePESEL(date) {
-    return date.format('YYMMDD') + '12345';
+  let result = date.format('YYMMDD') + '1234';
+
+  result += calculateControlDigit(result).toString();
+
+  return result;
 }
