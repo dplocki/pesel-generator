@@ -1,3 +1,3 @@
 export function generatePESEL(date) {
-    return '111030';
+    return date.format('YYMMDD');
 }
