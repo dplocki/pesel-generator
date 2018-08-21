@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { generatePESEL } from './generate';
-import { checkPESEL } from './pesel';
+import { checkPESEL, characterToDigit } from './pesel';
 
 it('generated PESEL should have eleven digits', () => {
   expect(generatePESEL(moment("20111031")).length).toBe(11);
@@ -16,4 +16,15 @@ it('generated PESEL should be valid one', () => {
   const pesel = generatePESEL(moment("20130412"));
 
   expect(checkPESEL(pesel)).toBe(true);
+});
+
+it('generated PESEL should have proper gender encoded', () => {
+  function get10thDigithOfGeneratedPESEL(date, gender) {
+    const _10thDigit = generatePESEL(moment(date), gender).substring(10, 0);
+
+    return characterToDigit(_10thDigit);
+  }
+
+  expect(get10thDigithOfGeneratedPESEL('19230212', 'male') % 2).toBe(1);
+  expect(get10thDigithOfGeneratedPESEL('19230212', 'female') % 2).toBe(0);
 });
