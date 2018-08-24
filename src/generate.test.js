@@ -24,6 +24,12 @@ it('generated PESEL from data range 2100 - 2199 should have 40 added to month nu
   expect(generatePESEL(moment("21991212")).substring(0, 6)).toBe('995212');
 });
 
+it('generated PESEL from data range 2200 - 2299 should have 60 added to month number', () => {
+  expect(generatePESEL(moment("22111031")).substring(0, 6)).toBe('117031');
+  expect(generatePESEL(moment("22740112")).substring(0, 6)).toBe('746112');
+  expect(generatePESEL(moment("22991212")).substring(0, 6)).toBe('997212');
+});
+
 it('generated PESEL should be valid one', () => {
   const pesel = generatePESEL(moment("20130412"));
 

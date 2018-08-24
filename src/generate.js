@@ -6,8 +6,10 @@ export function generatePESEL(date, gender = 'any') {
 
   if (year > 1999 && year < 2100) {
     result = (parseInt(result, 10) + 2000).toString();
-  } else if (year > 2099) {
+  } else if (year > 2099 && year < 2200) {
     result = (parseInt(result, 10) + 4000).toString();
+  } else if (year > 2199) {
+    result = (parseInt(result, 10) + 6000).toString();
   }
 
   result += '123' + generateDigitForGender(gender);
