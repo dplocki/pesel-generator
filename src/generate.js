@@ -1,10 +1,13 @@
 import { calculateControlDigit } from './pesel';
 
 export function generatePESEL(date, gender = 'any') {
+  const year = date.year();
   let result = date.format('YYMMDD');
 
-  if (date.year() > 1999) {
+  if (year > 1999 && year < 2100) {
     result = (parseInt(result, 10) + 2000).toString();
+  } else if (year > 2099) {
+    result = (parseInt(result, 10) + 4000).toString();
   }
 
   result += '123' + generateDigitForGender(gender);
