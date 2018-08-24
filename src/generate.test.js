@@ -52,3 +52,17 @@ it('generated PESEL should have proper gender encoded', () => {
   expect(get10thDigithOfGeneratedPESEL('19230212', 'male') % 2).toBe(1);
   expect(get10thDigithOfGeneratedPESEL('19230212', 'female') % 2).toBe(0);
 });
+
+it('generator should produce not the same PESEL-s for the same date', () => {
+  const date = '19231203';
+  const pesel1 = generatePESEL(moment(date), 'male');
+  const pesel2 = generatePESEL(moment(date), 'male');
+
+  expect(pesel1).not.toEqual(pesel2);
+
+  const date = '18540219';
+  const pesel3 = generatePESEL(moment(date), 'female');
+  const pesel4 = generatePESEL(moment(date), 'female');
+
+  expect(pesel3).not.toEqual(pesel4);
+});

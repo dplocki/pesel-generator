@@ -14,30 +14,43 @@ export function generatePESEL(date, gender = 'any') {
     result = addToMonth(result, 60);
   }
 
-  result += '123' + generateDigitForGender(gender);
+  result += randomThreeDigit();
+  result += generateDigitForGender(gender);
   result += calculateControlDigit(result).toString();
 
   return result;
-
-  function addToMonth(dateString, howMuch) {
-    const result = (parseInt(dateString, 10) + howMuch * 100).toString();
-
-    if (dateString.startsWith('00')) {
-      return '00' + result;
-    }
-
-    return result;
-  }
 }
 
 function generateDigitForGender(gender) {
-  switch(gender) {
-    case 'male':
-      return '1';
-
+  switch (gender) {
     case 'female':
-      return '2';
+    case 'male':
+      const random = randomNumber(1, 5) * 2;
+
+      if (gender === 'male') {
+        return random + 1;
+      } else {
+        return random;
+      }
   }
 
-  return '3';
+  return randomNumber(0, 9);
+}
+
+function addToMonth(dateString, howMuch) {
+  const result = (parseInt(dateString, 10) + howMuch * 100).toString();
+
+  if (dateString.startsWith('00')) {
+    return '00' + result;
+  }
+
+  return result;
+}
+
+function randomThreeDigit() {
+  return randomNumber(100, 999);
+}
+
+function randomNumber(min, max) {
+  return Math.floor((Math.random() * max) + min);
 }
