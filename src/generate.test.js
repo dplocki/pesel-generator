@@ -6,16 +6,20 @@ it('generated PESEL should have eleven digits', () => {
   expect(generatePESEL(moment("20111031")).length).toBe(11);
   expect(generatePESEL(moment("19770206")).length).toBe(11);
   expect(generatePESEL(moment("20080823")).length).toBe(11);
+  expect(generatePESEL(moment("20051217")).length).toBe(11);
+  expect(generatePESEL(moment("20111112")).length).toBe(11);
 });
 
 it('generated PESEL from data range 1800 - 1899 should start with does number', () => {
   expect(generatePESEL(moment("18001031")).substring(0, 6)).toBe('009031');
+  expect(generatePESEL(moment("18031031")).substring(0, 6)).toBe('039031');
   expect(generatePESEL(moment("18740112")).substring(0, 6)).toBe('748112');
   expect(generatePESEL(moment("18990412")).substring(0, 6)).toBe('998412');
 });
 
 it('generated PESEL from data range 1900 - 1999 should start with does number', () => {
   expect(generatePESEL(moment("19001031")).substring(0, 6)).toBe('001031');
+  expect(generatePESEL(moment("19011031")).substring(0, 6)).toBe('011031');
   expect(generatePESEL(moment("19740112")).substring(0, 6)).toBe('740112');
   expect(generatePESEL(moment("19990412")).substring(0, 6)).toBe('990412');
 });
