@@ -25,7 +25,7 @@ function generateDigitForGender(gender) {
   switch (gender) {
     case 'female':
     case 'male':
-      const random = randomNumber(1, 5) * 2;
+      const random = randomNumber(0, 5) * 2;
 
       if (gender === 'male') {
         return random + 1;
@@ -42,6 +42,8 @@ function addToMonth(dateString, howMuch) {
 
   if (dateString.startsWith('00')) {
     return '00' + result;
+  } else if (dateString.startsWith('0')) {
+    return '0' + result;
   }
 
   return result;

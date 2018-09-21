@@ -4,6 +4,8 @@ import { checkPESEL, characterToDigit } from './pesel';
 
 it('generated PESEL should have eleven digits', () => {
   expect(generatePESEL(moment("20111031")).length).toBe(11);
+  expect(generatePESEL(moment("19770206")).length).toBe(11);
+  expect(generatePESEL(moment("20080823")).length).toBe(11);
 });
 
 it('generated PESEL from data range 1800 - 1899 should start with does number', () => {
@@ -54,15 +56,15 @@ it('generated PESEL should have proper gender encoded', () => {
 });
 
 it('generator should produce not the same PESEL-s for the same date', () => {
-  const date = '19231203';
-  const pesel1 = generatePESEL(moment(date), 'male');
-  const pesel2 = generatePESEL(moment(date), 'male');
+  const date1 = '19231203';
+  const pesel1 = generatePESEL(moment(date1), 'male');
+  const pesel2 = generatePESEL(moment(date1), 'male');
 
   expect(pesel1).not.toEqual(pesel2);
 
-  const date = '18540219';
-  const pesel3 = generatePESEL(moment(date), 'female');
-  const pesel4 = generatePESEL(moment(date), 'female');
+  const date2 = '18540219';
+  const pesel3 = generatePESEL(moment(date2), 'female');
+  const pesel4 = generatePESEL(moment(date2), 'female');
 
   expect(pesel3).not.toEqual(pesel4);
 });
