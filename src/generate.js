@@ -32,6 +32,8 @@ function generateDigitForGender(gender) {
       } else {
         return random;
       }
+
+    default:
   }
 
   return randomNumber(0, 9);

@@ -1,4 +1,3 @@
-import moment from 'moment';
 import momentRandom from 'moment-random';
 import React, { Component } from 'react';
 import './App.css';
