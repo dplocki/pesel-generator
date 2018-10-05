@@ -50,7 +50,10 @@ it('generated PESEL should be valid one', () => {
 
 it('generated PESEL should have proper gender encoded', () => {
   function get10thDigithOfGeneratedPESEL(date, gender) {
-    const _10thDigit = generatePESEL(moment(date), gender).substring(10, 0);
+    const pesel = generatePESEL(moment(date), gender);
+    const _10thDigit = pesel.substring(10, 0);
+
+    expect(pesel.length).toBe(11);
 
     return characterToDigit(_10thDigit);
   }

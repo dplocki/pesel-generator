@@ -25,7 +25,7 @@ function generateDigitForGender(gender) {
   switch (gender) {
     case 'female':
     case 'male':
-      const random = randomNumber(0, 5) * 2;
+      const random = randomNumber(0, 4) * 2;
 
       if (gender === 'male') {
         return random + 1;
