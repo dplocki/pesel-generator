@@ -12,3 +12,10 @@ it ('For missing day number date should generate in range', () => {
   expect(resultDate >= moment('20120301')).toBe(true);
   expect(resultDate < moment('20120401')).toBe(true);
 });
+
+it ('For missing day and month number date should generate in range', () => {
+  const resultDate = dateFilter('1984');
+
+  expect(resultDate >= moment('19840101')).toBe(true);
+  expect(resultDate < moment('19840101')).toBe(true);
+});
