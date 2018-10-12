@@ -17,5 +17,14 @@ it ('For missing day and month number date should generate in range', () => {
   const resultDate = dateFilter('1984');
 
   expect(resultDate >= moment('19840101')).toBe(true);
-  expect(resultDate < moment('19840101')).toBe(true);
+  expect(resultDate < moment('19850101')).toBe(true);
+});
+
+it ('For not whole numbers should return null', () => {
+  expect(dateFilter('1')).toBe(null);
+  expect(dateFilter('11')).toBe(null);
+  expect(dateFilter('111')).toBe(null);
+  expect(dateFilter('11111')).toBe(null);
+  expect(dateFilter('1111111')).toBe(null);
+  expect(dateFilter('111111111')).toBe(null);
 });
