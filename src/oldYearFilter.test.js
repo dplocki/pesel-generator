@@ -8,5 +8,4 @@ it('Providing years old should be calculate to date', () => {
 it('Providing incorrect years old should be return null', () => {
   expect(oldYearFilter('a')).toBe(null);
   expect(oldYearFilter('dkjnsdkjf')).toBe(null);
-  expect(oldYearFilter('1000')).toBe(null);
 });
