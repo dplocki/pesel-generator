@@ -1,6 +1,6 @@
 # PESEL Generator
 
-A simple [PESEL](https://en.wikipedia.org/wiki/PESEL) generator in [React](https://en.wikipedia.org/wiki/React_(JavaScript_library).
+A simple [PESEL](https://en.wikipedia.org/wiki/PESEL) generator in [React](https://en.wikipedia.org/wiki/React_(JavaScript_library)).
 
 ## Create React App
 
