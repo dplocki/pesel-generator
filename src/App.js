@@ -1,7 +1,7 @@
-import momentRandom from 'moment-random';
 import React, { Component } from 'react';
 import './App.css';
 import { generatePESEL } from './generate';
+import { filterMerge } from './filterMerge';
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class App extends Component {
   handleGenerateButtonClick() {
     const pesels = [...Array(this.state.howMany)]
       .map(_ => {
-        const date = momentRandom();
+        const date = filterMerge(this.state.value);
 
         return {
           date: date.format('YYYY-MM-DD'),
