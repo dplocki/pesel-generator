@@ -3,8 +3,18 @@ import { filterMerge } from './filterMerge';
 const dateFilterModule = require('./dateFilter');
 const oldYearFilterModule = require('./oldYearFilter');
 
-const dateFilterSpy = jest.spyOn(dateFilterModule, 'dateFilter');
-const oldYearFilterSpy = jest.spyOn(oldYearFilterModule, 'oldYearFilter');
+let dateFilterSpy = null;
+let oldYearFilterSpy = null;
+
+beforeEach(() => {
+  dateFilterSpy = jest.spyOn(dateFilterModule, 'dateFilter');
+  oldYearFilterSpy = jest.spyOn(oldYearFilterModule, 'oldYearFilter');
+});
+
+afterEach(() => {
+  dateFilterSpy.mockRestore();
+  oldYearFilterSpy.mockRestore();
+});
 
 it ('User enter two digit or less, year old filter should called', () => {
   var result = filterMerge('12');

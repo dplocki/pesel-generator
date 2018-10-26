@@ -1,5 +1,10 @@
-import { oldYearFilter } from './oldYearFilter'
+import { oldYearFilter } from './oldYearFilter';
+import { dateFilter } from './dateFilter';
 
 export function filterMerge(input) {
-    return oldYearFilter(input)
+    if (input.length <= 2) {
+        return oldYearFilter(input);
+    }
+
+    return dateFilter(input);
 }
