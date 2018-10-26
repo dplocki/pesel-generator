@@ -31,3 +31,11 @@ it ('User enter more than characters than two, date filter should be called', ()
   expect(oldYearFilterSpy).not.toHaveBeenCalled();
   expect(result).not.toBeNull();
 });
+
+it ('User did not provide any input, none of the filters should be called', () => {
+  var result = filterMerge(null);
+
+  expect(dateFilterSpy).not.toHaveBeenCalled();
+  expect(oldYearFilterSpy).not.toHaveBeenCalled();
+  expect(result).not.toBeNull();
+});
