@@ -7,8 +7,9 @@ const dateFilterSpy = jest.spyOn(dateFilterModule, 'dateFilter');
 const oldYearFilterSpy = jest.spyOn(oldYearFilterModule, 'oldYearFilter');
 
 it ('User enter two digit or less, year old filter should called', () => {
-  filterMerge('12');
+  var result = filterMerge('12');
 
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).toHaveBeenCalled();
+  expect(result).not.toBeNull();
 });

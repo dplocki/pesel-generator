@@ -1,3 +1,5 @@
-export function filterMerge(input) {
+import { oldYearFilter } from './oldYearFilter'
 
+export function filterMerge(input) {
+    return oldYearFilter(input)
 }
