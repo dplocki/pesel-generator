@@ -51,7 +51,7 @@ class App extends Component {
           <button onClick={this.handleGenerateButtonClick}>Generate</button>
         </p>
 
-        <textarea value={pesels} rows="10" cols="111" />
+        <textarea value={pesels} rows="10" cols="111" readOnly={true} />
       </div>
     );
   }
