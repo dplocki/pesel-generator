@@ -25,11 +25,11 @@ class App extends Component {
   handleGenerateButtonClick() {
     const pesels = [...Array(this.state.howMany)]
       .map(_ => {
-        const date = filterMerge(this.state.value);
+        const generatorData = filterMerge(this.state.value);
 
         return {
-          date: date.format('YYYY-MM-DD'),
-          pesel: generatePESEL(date)
+          date: generatorData.date.format('YYYY-MM-DD'),
+          pesel: generatePESEL(generatorData.date, generatorData.gender)
         }
       });
 
