@@ -22,7 +22,7 @@ it ('User enter more than characters than two, date filter should be called', ()
   expect(dateFilterSpy).toHaveBeenCalled();
   expect(oldYearFilterSpy).not.toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('any');
+  expect(result.gender).toBe('a');
 });
 
 it ('User did not provide any input, none of the filters should be called', () => {
@@ -31,7 +31,7 @@ it ('User did not provide any input, none of the filters should be called', () =
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).not.toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('any');
+  expect(result.gender).toBe('a');
 });
 
 it ('User enter two digit and less than sign, year old filter should called', () => {
@@ -40,7 +40,7 @@ it ('User enter two digit and less than sign, year old filter should called', ()
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('any');
+  expect(result.gender).toBe('a');
 });
 
 it ('User enter two digit and less than sign, year old filter should called', () => {
@@ -49,5 +49,19 @@ it ('User enter two digit and less than sign, year old filter should called', ()
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('any');
+  expect(result.gender).toBe('a');
+});
+
+it ('User enter femal gender limit', () => {
+  const result = filterMerge('f12');
+
+  expect(result.date).not.toBeNull();
+  expect(result.gender).toBe('f');
+});
+
+it ('User enter male gender limit', () => {
+  const result = filterMerge('m12');
+
+  expect(result.date).not.toBeNull();
+  expect(result.gender).toBe('m');
 });
