@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { generatePESEL } from './generate';
 import { checkPESEL, characterToDigit } from './pesel';
+import { GenderEnum } from './genderEnum';
+
 
 it('generated PESEL should have eleven digits', () => {
   expect(generatePESEL(moment("20111031")).length).toBe(11);
@@ -58,20 +60,20 @@ it('generated PESEL should have proper gender encoded', () => {
     return characterToDigit(_10thDigit);
   }
 
-  expect(get10thDigithOfGeneratedPESEL('19230212', 'male') % 2).toBe(1);
-  expect(get10thDigithOfGeneratedPESEL('19230212', 'female') % 2).toBe(0);
+  expect(get10thDigithOfGeneratedPESEL('19230212', GenderEnum.Male) % 2).toBe(1);
+  expect(get10thDigithOfGeneratedPESEL('19230212', GenderEnum.Female) % 2).toBe(0);
 });
 
 it('generator should produce not the same PESEL-s for the same date', () => {
   const date1 = '19231203';
-  const pesel1 = generatePESEL(moment(date1), 'male');
-  const pesel2 = generatePESEL(moment(date1), 'male');
+  const pesel1 = generatePESEL(moment(date1), GenderEnum.Male);
+  const pesel2 = generatePESEL(moment(date1), GenderEnum.Male);
 
   expect(pesel1).not.toEqual(pesel2);
 
   const date2 = '18540219';
-  const pesel3 = generatePESEL(moment(date2), 'female');
-  const pesel4 = generatePESEL(moment(date2), 'female');
+  const pesel3 = generatePESEL(moment(date2), GenderEnum.Female);
+  const pesel4 = generatePESEL(moment(date2), GenderEnum.Female);
 
   expect(pesel3).not.toEqual(pesel4);
 });

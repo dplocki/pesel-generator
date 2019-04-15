@@ -1,4 +1,5 @@
 import { filterMerge } from './filterMerge';
+import { GenderEnum } from './genderEnum';
 
 const dateFilterModule = require('./dateFilter');
 const oldYearFilterModule = require('./oldYearFilter');
@@ -22,7 +23,7 @@ it ('User enter more than characters than two, date filter should be called', ()
   expect(dateFilterSpy).toHaveBeenCalled();
   expect(oldYearFilterSpy).not.toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('a');
+  expect(result.gender).toBe(GenderEnum.Any);
 });
 
 it ('User did not provide any input, none of the filters should be called', () => {
@@ -31,7 +32,7 @@ it ('User did not provide any input, none of the filters should be called', () =
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).not.toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('a');
+  expect(result.gender).toBe(GenderEnum.Any);
 });
 
 it ('User enter two digit and less than sign, year old filter should called', () => {
@@ -40,7 +41,7 @@ it ('User enter two digit and less than sign, year old filter should called', ()
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('a');
+  expect(result.gender).toBe(GenderEnum.Any);
 });
 
 it ('User enter two digit and less than sign, year old filter should called', () => {
@@ -49,19 +50,19 @@ it ('User enter two digit and less than sign, year old filter should called', ()
   expect(dateFilterSpy).not.toHaveBeenCalled();
   expect(oldYearFilterSpy).toHaveBeenCalled();
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('a');
+  expect(result.gender).toBe(GenderEnum.Any);
 });
 
 it ('User enter femal gender limit', () => {
   const result = filterMerge('f12');
 
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('f');
+  expect(result.gender).toBe(GenderEnum.Female);
 });
 
 it ('User enter male gender limit', () => {
   const result = filterMerge('m12');
 
   expect(result.date).not.toBeNull();
-  expect(result.gender).toBe('m');
+  expect(result.gender).toBe(GenderEnum.Male);
 });

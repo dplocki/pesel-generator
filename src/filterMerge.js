@@ -1,9 +1,10 @@
 import momentRandom from 'moment-random';
 import { oldYearFilter } from './oldYearFilter';
 import { dateFilter } from './dateFilter';
+import { GenderEnum } from './genderEnum';
 
 export function filterMerge(input) {
-  const result = { date: null, gender: 'a' };
+  const result = { date: null, gender: GenderEnum.Any };
   const inputRegex = /^(m|f|a)?(([><=])?(\d+))$/i;
   const match = inputRegex.exec(input);
 
@@ -14,10 +15,25 @@ export function filterMerge(input) {
       result.date = oldYearFilter(match[2]);
     }
 
-    result.gender = match[1] ? match[1] : 'a';
+    result.gender = readGenderInstruction(match[1]);
   } else {
     result.date = momentRandom();
   }
 
   return result;
+}
+
+function readGenderInstruction(symbol) {
+  if (!symbol) {
+    return GenderEnum.Any;
+  }
+
+  const letter = symbol[0].toLowerCase();
+  if (letter === 'f') {
+    return GenderEnum.Female;
+  } else if (letter === 'm') {
+    return GenderEnum.Male;
+  } else {
+    return GenderEnum.Any;
+  }
 }

@@ -1,4 +1,5 @@
 import { calculateControlDigit } from './pesel';
+import { GenderEnum } from './genderEnum';
 
 export function generatePESEL(date, gender = 'any') {
   const year = date.year();
@@ -22,21 +23,18 @@ export function generatePESEL(date, gender = 'any') {
 }
 
 function generateDigitForGender(gender) {
-  switch (gender) {
-    case 'female':
-    case 'male':
-      const random = randomNumber(0, 4) * 2;
-
-      if (gender === 'male') {
-        return random + 1;
-      } else {
-        return random;
-      }
-
-    default:
+  if (gender === GenderEnum.Any)
+  {
+    return randomNumber(0, 9);
   }
 
-  return randomNumber(0, 9);
+  const random = randomNumber(0, 4) * 2;
+
+  if (gender === GenderEnum.Male) {
+    return random + 1;
+  } else {
+    return random;
+  }
 }
 
 function addToMonth(dateString, howMuch) {
