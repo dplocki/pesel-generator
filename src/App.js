@@ -58,44 +58,71 @@ class App extends Component {
 
     return (
       <div className="container">
+
         <fieldset className="form-group">
-          <div className="form-check">
+          <legend>Płeć</legend>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input"
+              type="radio"
+              name="peselGender"
+              id="radioGenderAny"
+              value={GenderEnum.Any}
+              checked={this.state.gender === GenderEnum.Any}
+              onChange={this.handleOnGenderChange} />
             <label className="form-check-label" htmlFor="radioGenderAny">
-              <input className="form-check-input"
-                  type="radio"
-                  name="radioGenderGroup"
-                  id="radioGenderAny"
-                  value={GenderEnum.Any}
-                  checked={this.state.gender === GenderEnum.Any}
-                  onChange={this.handleOnGenderChange} />
               Dowolna
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check form-check-inline">
+            <input className="form-check-input"
+              type="radio"
+              name="peselGender"
+              id="radioGenderFemale"
+              value={GenderEnum.Female}
+              checked={this.state.gender === GenderEnum.Female}
+              onChange={this.handleOnGenderChange} />
             <label className="form-check-label" htmlFor="radioGenderFemale">
-              <input className="form-check-input"
-                  type="radio"
-                  name="radioGenderGroup"
-                  id="radioGenderFemale"
-                  value={GenderEnum.Female}
-                  checked={this.state.gender === GenderEnum.Female}
-                  onChange={this.handleOnGenderChange} />
               Kobieta
             </label>
           </div>
-          <div className="form-check">
+          <div className="form-check form-check-inline">
+            <input className="form-check-input"
+              type="radio"
+              name="peselGender"
+              id="radioGenderMale"
+              value={GenderEnum.Male}
+              checked={this.state.gender === GenderEnum.Male}
+              onChange={this.handleOnGenderChange} />
             <label className="form-check-label" htmlFor="radioGenderMale">
-              <input className="form-check-input"
-                   type="radio"
-                   name="radioGenderGroup"
-                   id="radioGenderMale"
-                   value={GenderEnum.Male}
-                   checked={this.state.gender === GenderEnum.Male}
-                   onChange={this.handleOnGenderChange} />
               Mężczyzna
             </label>
           </div>
         </fieldset>
+
+        <div className="row">
+
+          <fieldset className="form-group col-6">
+            <legend>Wiek</legend>
+
+            <div className="form-group btn-group">
+              <div className="form-group btn-group">
+                <select className="mdb-select md-form" name="peselAgeSign">
+                  <option value="=" selected="selected">=</option>
+                  <option value=">">&gt;</option>
+                  <option value="<">&lt;</option>
+                </select>
+
+                <input type="number"
+                  class="form-control"
+                  name="peselAgeNumber" />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset className="form-group col-6">
+            <legend>Data urodzenia</legend>
+          </fieldset>
+        </div>
 
         <fieldset className="form-group">
           <div className="input-group mb-3">
