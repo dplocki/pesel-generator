@@ -56,47 +56,32 @@ class App extends Component {
       ? this.state.pesels.reduce((result, next) => `${result}${next.date}: ${next.pesel}\n`, '')
       : '';
 
+    const genderRadioButtons = [
+      { value: GenderEnum.Any, label: 'Dowolna' },
+      { value: GenderEnum.Male, label: 'Mężczyzna' },
+      { value: GenderEnum.Female, label: 'Kobieta' }
+    ];
+
     return (
       <div className="container">
 
         <fieldset className="form-group">
           <legend>Płeć</legend>
-          <div className="form-check form-check-inline">
-            <input className="form-check-input"
-              type="radio"
-              name="peselGender"
-              id="radioGenderAny"
-              value={GenderEnum.Any}
-              checked={this.state.gender === GenderEnum.Any}
-              onChange={this.handleOnGenderChange} />
-            <label className="form-check-label" htmlFor="radioGenderAny">
-              Dowolna
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input className="form-check-input"
-              type="radio"
-              name="peselGender"
-              id="radioGenderFemale"
-              value={GenderEnum.Female}
-              checked={this.state.gender === GenderEnum.Female}
-              onChange={this.handleOnGenderChange} />
-            <label className="form-check-label" htmlFor="radioGenderFemale">
-              Kobieta
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input className="form-check-input"
-              type="radio"
-              name="peselGender"
-              id="radioGenderMale"
-              value={GenderEnum.Male}
-              checked={this.state.gender === GenderEnum.Male}
-              onChange={this.handleOnGenderChange} />
-            <label className="form-check-label" htmlFor="radioGenderMale">
-              Mężczyzna
-            </label>
-          </div>
+          {genderRadioButtons.map(radioButon => {
+            const id = `radioGender${radioButon.value}`;
+            return <div key={radioButon.value} className="form-check form-check-inline">
+                <input className="form-check-input"
+                  type="radio"
+                  name="peselGender"
+                  id={id}
+                  value={radioButon.value}
+                  checked={this.state.gender === radioButon.value}
+                  onChange={this.handleOnGenderChange} />
+                <label className="form-check-label" htmlFor={id}>
+                  {radioButon.label}
+                </label>
+              </div>
+          })}
         </fieldset>
 
         <div className="row">
@@ -107,13 +92,13 @@ class App extends Component {
             <div className="form-group btn-group">
               <div className="form-group btn-group">
                 <select className="mdb-select md-form" name="peselAgeSign">
-                  <option value="=" selected="selected">=</option>
+                  <option value="=">=</option>
                   <option value=">">&gt;</option>
                   <option value="<">&lt;</option>
                 </select>
 
                 <input type="number"
-                  class="form-control"
+                  className="form-control"
                   name="peselAgeNumber" />
               </div>
             </div>
