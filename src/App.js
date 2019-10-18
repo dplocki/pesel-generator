@@ -3,7 +3,10 @@ import './App.css';
 import { generatePESEL } from './generate';
 import { filterMerge } from './filterMerge';
 import { GenderEnum } from './genderEnum';
-
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
 class App extends Component {
   constructor(props) {
@@ -63,20 +66,25 @@ class App extends Component {
     ];
 
     return (
-      <div className="container">
+      <Container>
 
         <fieldset className="form-group">
           <legend>Płeć</legend>
           {genderRadioButtons.map(radioButon => {
             const id = `radioGender${radioButon.value}`;
             return <div key={radioButon.value} className="form-check form-check-inline">
-                <input className="form-check-input"
-                  type="radio"
-                  name="peselGender"
-                  id={id}
-                  value={radioButon.value}
-                  checked={this.state.gender === radioButon.value}
-                  onChange={this.handleOnGenderChange} />
+              <Form.Check
+                      custom
+                      inline
+                      label="1"
+                      type="radio"
+                      value={radioButon.value}
+                      id={id}
+                      checked={this.state.gender === radioButon.value}
+                      onChange={this.handleOnGenderChange}
+                      name="peselGender"
+                    />
+
                 <label className="form-check-label" htmlFor={id}>
                   {radioButon.label}
                 </label>
@@ -84,7 +92,7 @@ class App extends Component {
           })}
         </fieldset>
 
-        <div className="row">
+        <Row>
 
           <fieldset className="form-group col-6">
             <legend>Wiek</legend>
@@ -107,13 +115,13 @@ class App extends Component {
           <fieldset className="form-group col-6">
             <legend>Data urodzenia</legend>
           </fieldset>
-        </div>
+        </Row>
 
         <fieldset className="form-group">
           <div className="input-group mb-3">
             <input type="text" className="form-control" name="date_filter" onChange={this.handleDateFilterChange} />
             <div className="input-group-append">
-              <button type="button" className="btn btn-outline-secondary" onClick={this.handleGenerateButtonClick}>Generate</button>
+              <Button onClick={this.handleGenerateButtonClick}>Generate</Button>
             </div>
           </div>
         </fieldset>
@@ -124,7 +132,7 @@ class App extends Component {
             <textarea className="form-control" rows={5} value={pesels} readOnly={true}></textarea>
           </div>
         </fieldset>
-      </div>
+      </Container>
     );
   }
 }
