@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { generatePESEL } from './generate';
-import { filterMerge } from './filterMerge';
-import { GenderEnum } from './genderEnum';
+import { generatePESEL } from '../logic/generate';
+import { filterMerge } from '../logic/filterMerge';
+import { GenderEnum } from '../logic/genderEnum';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
