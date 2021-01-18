@@ -1,3 +1,5 @@
+import * as _ from "lodash-compat";
+
 export function checkPESEL(pesel) {
   if (pesel.length !== 11) {
     return false;
@@ -13,10 +15,8 @@ export function characterToDigit(character) {
 export function calculateControlDigit(pesel) {
   const weights = [9, 7, 3, 1];
 
-  let sum = 0;
-  for (let i = 0; i < 10; i++) {
-    sum += characterToDigit(pesel.charAt(i)) * weights[i % 4];
-  }
-
-  return sum % 10;
+  return _.sum(
+      _.take(pesel, 10)
+      .map((c, i) => characterToDigit(c) * weights[i % 4])
+    ) % 10;
 }
