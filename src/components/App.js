@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { generatePESEL } from '../logic/generate';
 import { filterMerge } from '../logic/filterMerge';
 import { GenderEnum } from '../logic/genderEnum';
