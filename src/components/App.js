@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { generatePESEL } from '../logic/generate';
 import { filterMerge } from '../logic/filterMerge';
 import { GenderEnum } from '../logic/genderEnum';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+import {
+  Container,
+  InputGroup,
+  Form,
+  FormControl
+} from 'react-bootstrap';
+
 
 class App extends Component {
   constructor(props) {
@@ -58,80 +61,32 @@ class App extends Component {
       ? this.state.pesels.reduce((result, next) => `${result}${next.date}: ${next.pesel}\n`, '')
       : '';
 
-    const genderRadioButtons = [
-      { value: GenderEnum.Any, label: 'Dowolna' },
+    const genderOptions = [
+      { value: GenderEnum.Any, label: 'Dowolna płeć' },
       { value: GenderEnum.Male, label: 'Mężczyzna' },
       { value: GenderEnum.Female, label: 'Kobieta' }
     ];
 
     return (
       <Container>
-
-        <fieldset className="form-group">
-          <legend>Płeć</legend>
-          {genderRadioButtons.map(radioButon => {
-            const id = `radioGender${radioButon.value}`;
-            return <div key={radioButon.value} className="form-check form-check-inline">
-              <Form.Check
-                      custom
-                      inline
-                      label="1"
-                      type="radio"
-                      value={radioButon.value}
-                      id={id}
-                      checked={this.state.gender === radioButon.value}
-                      onChange={this.handleOnGenderChange}
-                      name="peselGender"
-                    />
-
-                <label className="form-check-label" htmlFor={id}>
-                  {radioButon.label}
-                </label>
-              </div>
-          })}
-        </fieldset>
-
-        <Row>
-
-          <fieldset className="form-group col-6">
-            <legend>Wiek</legend>
-
-            <div className="form-group btn-group">
-              <div className="form-group btn-group">
-                <select className="mdb-select md-form" name="peselAgeSign">
-                  <option value="=">=</option>
-                  <option value=">">&gt;</option>
-                  <option value="<">&lt;</option>
-                </select>
-
-                <input type="number"
-                  className="form-control"
-                  name="peselAgeNumber" />
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset className="form-group col-6">
-            <legend>Data urodzenia</legend>
-          </fieldset>
-        </Row>
-
-        <fieldset className="form-group">
-          <div className="input-group mb-3">
-            <input type="text" className="form-control" name="date_filter" onChange={this.handleDateFilterChange} />
-            <div className="input-group-append">
-              <Button onClick={this.handleGenerateButtonClick}>Generate</Button>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="comment">Wynik</label>
-            <textarea className="form-control" rows={5} value={pesels} readOnly={true}></textarea>
-          </div>
-        </fieldset>
-      </Container>
+        <Form>
+          <InputGroup className="mb-3">
+            <select className="mdb-select md-form" name="peselAgeSign">
+              <option value="=">=</option>
+              <option value=">">&gt;</option>
+              <option value="<">&lt;</option>
+            </select>
+            <FormControl />
+            <select>
+              {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
+            </select>
+          </InputGroup>
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Wyniki</Form.Label>
+            <Form.Control as="textarea" rows={3} value={pesels} readOnly={true} />
+          </Form.Group>
+        </Form>
+      </Container >
     );
   }
 }
