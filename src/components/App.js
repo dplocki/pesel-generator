@@ -4,10 +4,9 @@ import { filterMerge } from '../logic/filterMerge';
 import { GenderEnum } from '../logic/genderEnum';
 import {
   Container,
-  InputGroup,
-  Form,
-  FormControl
+  Form
 } from 'react-bootstrap';
+import GeneratorOptions from './GeneratorOptions';
 
 
 class App extends Component {
@@ -61,29 +60,13 @@ class App extends Component {
       ? this.state.pesels.reduce((result, next) => `${result}${next.date}: ${next.pesel}\n`, '')
       : '';
 
-    const genderOptions = [
-      { value: GenderEnum.Any, label: 'Dowolna płeć' },
-      { value: GenderEnum.Male, label: 'Mężczyzna' },
-      { value: GenderEnum.Female, label: 'Kobieta' }
-    ];
-
     const description = 'Dowolny PESEL';
 
     return (
       <Container>
         <Form.Group>
           <Form.Label>Generuj PESEL-e:</Form.Label>
-          <InputGroup>
-            <select name="peselAgeSign">
-              <option value="=">=</option>
-              <option value=">">&gt;</option>
-              <option value="<">&lt;</option>
-            </select>
-            <FormControl />
-            <select>
-              {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
-            </select>
-          </InputGroup>
+          <GeneratorOptions></GeneratorOptions>
           <Form.Text className="text-muted">
             {description}
           </Form.Text>
