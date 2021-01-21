@@ -67,11 +67,14 @@ class App extends Component {
       { value: GenderEnum.Female, label: 'Kobieta' }
     ];
 
+    const description = 'Dowolny PESEL';
+
     return (
       <Container>
-        <Form>
-          <InputGroup className="mb-3">
-            <select className="mdb-select md-form" name="peselAgeSign">
+        <Form.Group>
+          <Form.Label>Generuj PESEL-e:</Form.Label>
+          <InputGroup>
+            <select name="peselAgeSign">
               <option value="=">=</option>
               <option value=">">&gt;</option>
               <option value="<">&lt;</option>
@@ -81,12 +84,15 @@ class App extends Component {
               {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
             </select>
           </InputGroup>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Wyniki</Form.Label>
-            <Form.Control as="textarea" rows={3} value={pesels} readOnly={true} />
-          </Form.Group>
-        </Form>
-      </Container >
+          <Form.Text className="text-muted">
+            {description}
+          </Form.Text>
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Wyniki</Form.Label>
+          <Form.Control as="textarea" rows={5} value={pesels} readOnly={true} />
+        </Form.Group>
+      </Container>
     );
   }
 }
