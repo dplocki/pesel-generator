@@ -1,7 +1,8 @@
 # PESEL Generator
 
-![GitHub branch checks state](https://img.shields.io/github/checks-status/dplocki/pesel-generator/master)
 ![GitHub](https://img.shields.io/github/license/dplocki/pesel-generator)
+![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fdplocki%2Fpesel-generator%2Fbadge%3Fref%3Dmaster&style=flat)
+![GitHub branch checks state](https://img.shields.io/github/checks-status/dplocki/pesel-generator/master)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dplocki/pesel-generator?sort=semver)
 
 A simple [PESEL](https://en.wikipedia.org/wiki/PESEL) generator in [React](https://en.wikipedia.org/wiki/React_(JavaScript_library)).
