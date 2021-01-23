@@ -9,15 +9,22 @@ const genderOptions = [
   { value: GenderEnum.Female, label: 'Kobieta' }
 ];
 
-export default function GeneratorOptions() {
+
+export default function GeneratorOptions({ onChange }) {
+  let yearOrAgeMeaning = '=';
+  let yearOrAge = '';
+  let gender = GenderEnum.Any;
+
+  const invokeOnChange = () => onChange({ yearOrAgeMeaning: yearOrAgeMeaning, yearOrAge: yearOrAge, gender: gender});
+
   return <InputGroup>
-    <select name="peselAgeSign">
+    <select onChange={e => { yearOrAgeMeaning = e.target.value; invokeOnChange() }}>
       <option value="=">=</option>
       <option value=">">&gt;</option>
       <option value="<">&lt;</option>
     </select>
-    <FormControl />
-    <select>
+    <FormControl onChange={e => { yearOrAge = e.target.value; invokeOnChange() }} />
+    <select onChange={e => {gender = parseInt(e.target.value, 10); invokeOnChange() }}>
       {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
     </select>
   </InputGroup>;

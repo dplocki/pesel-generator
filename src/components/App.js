@@ -7,6 +7,7 @@ import {
   Form
 } from 'react-bootstrap';
 import GeneratorOptions from './GeneratorOptions';
+import GeneratorOptionsDescription from './GeneratorOptionsDescription';
 
 
 class App extends Component {
@@ -20,14 +21,7 @@ class App extends Component {
     };
 
     this.handleGenerateButtonClick = this.handleGenerateButtonClick.bind(this);
-    this.handleDateFilterChange = this.handleDateFilterChange.bind(this);
-    this.handleOnGenderChange = this.handleOnGenderChange.bind(this);
-  }
-
-  handleDateFilterChange(event) {
-    this.setState({
-      value: event.target.value
-    });
+    this.handleGeneratorOption = this.handleGeneratorOption.bind(this);
   }
 
   handleGenerateButtonClick() {
@@ -47,11 +41,10 @@ class App extends Component {
     }));
   }
 
-  handleOnGenderChange(event) {
-    const value = parseInt(event.target.value);
+  handleGeneratorOption(value) {
     this.setState(state => ({
       ...state,
-      gender: value
+      generatorOption: value
     }));
   }
 
@@ -60,18 +53,14 @@ class App extends Component {
       ? this.state.pesels.reduce((result, next) => `${result}${next.date}: ${next.pesel}\n`, '')
       : '';
 
-    const description = 'Dowolny PESEL';
-
     return (
       <Container>
         <Form.Group>
           <Form.Label>Generuj PESEL-e:</Form.Label>
-          <GeneratorOptions></GeneratorOptions>
-          <Form.Text className="text-muted">
-            {description}
-          </Form.Text>
+          <GeneratorOptions onChange={this.handleGeneratorOption} />
+          <GeneratorOptionsDescription value={this.state.generatorOptions} />
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
+        <Form.Group>
           <Form.Label>Wyniki</Form.Label>
           <Form.Control as="textarea" rows={5} value={pesels} readOnly={true} />
         </Form.Group>
