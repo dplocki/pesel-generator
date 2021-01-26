@@ -35,7 +35,7 @@ it ('User did not provide any input, none of the filters should be called', () =
   expect(result.gender).toBe(GenderEnum.Any);
 });
 
-it ('User enter two digit and less than sign, year old filter should called', () => {
+it ('User enter two digit and more than sign, year old filter should called', () => {
   const result = filterMerge('>12');
 
   expect(dateFilterSpy).not.toHaveBeenCalled();
