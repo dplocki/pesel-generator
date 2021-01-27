@@ -6,7 +6,7 @@ import GeneratorOptionsDescription from './GeneratorOptionsDescription';
 let container;
 
 function getDescription(options) {
-  ReactDOM.render(<GeneratorOptionsDescription options={options} />, container);
+  ReactDOM.render(<GeneratorOptionsDescription value={options} />, container);
   return container.querySelector('.text-muted').textContent;
 }
 

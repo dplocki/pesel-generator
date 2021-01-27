@@ -40,9 +40,8 @@ function buildDescription(options) {
   return result + ' mających ' + meaningLabel + ' ' + yearNumberToLabel(options.yearOrAge)
 }
 
-
-export default function GeneratorOptionsDescription({ options }) {
+export default function GeneratorOptionsDescription({ value }) {
   return <Form.Text className="text-muted">
-    {options ? buildDescription(options) : 'Dowolne PESEL-e'}
+    {value ? buildDescription(value) : 'Dowolne PESEL-e'}
   </Form.Text>;
 }

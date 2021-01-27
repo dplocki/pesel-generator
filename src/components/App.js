@@ -44,7 +44,7 @@ class App extends Component {
   handleGeneratorOption(value) {
     this.setState(state => ({
       ...state,
-      generatorOption: value
+      generatorOptions: value
     }));
   }
 

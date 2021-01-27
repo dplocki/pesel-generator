@@ -21,7 +21,9 @@ export default function GeneratorOptions({ onChange }) {
     <select onChange={e => { yearOrAgeMeaning = e.target.value; invokeOnChange() }}>
       <option value="=">=</option>
       <option value=">">&gt;</option>
+      <option value=">=">&gt;=</option>
       <option value="<">&lt;</option>
+      <option value="=<">=&lt;</option>
     </select>
     <FormControl onChange={e => { yearOrAge = e.target.value; invokeOnChange() }} />
     <select onChange={e => {gender = parseInt(e.target.value, 10); invokeOnChange() }}>
