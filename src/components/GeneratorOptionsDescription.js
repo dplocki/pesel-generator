@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { GenderEnum } from '../logic/genderEnum';
 
+const DEFAULT_TEXT = 'Dowolne PESEL-e';
 
 function yearNumberToLabel(value) {
   if (value === 1) {
@@ -15,8 +16,11 @@ function yearNumberToLabel(value) {
   return value + ' lat';
 }
 
-
 function buildDescription(options) {
+  if (options.yearOrAge === 0 && options.gender === GenderEnum.Any) {
+    return DEFAULT_TEXT;
+  }
+
   const genderLabel = {
     [GenderEnum.Male]: 'mężczyzn',
     [GenderEnum.Female]: 'kobiet',
@@ -25,7 +29,7 @@ function buildDescription(options) {
 
   let result = `Tylko PESEL-e ${genderLabel}`;
 
-  if (options.yearOrAge === null) {
+  if (options.yearOrAge === 0) {
     return result;
   }
 
@@ -42,6 +46,6 @@ function buildDescription(options) {
 
 export default function GeneratorOptionsDescription({ value }) {
   return <Form.Text className="text-muted">
-    {value ? buildDescription(value) : 'Dowolne PESEL-e'}
+    {value ? buildDescription(value) : DEFAULT_TEXT}
   </Form.Text>;
 }

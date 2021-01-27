@@ -12,7 +12,7 @@ const genderOptions = [
 
 export default function GeneratorOptions({ onChange }) {
   let yearOrAgeMeaning = '=';
-  let yearOrAge = '';
+  let yearOrAge = 0;
   let gender = GenderEnum.Any;
 
   const invokeOnChange = () => onChange({ yearOrAgeMeaning: yearOrAgeMeaning, yearOrAge: yearOrAge, gender: gender});
@@ -25,7 +25,7 @@ export default function GeneratorOptions({ onChange }) {
       <option value="<">&lt;</option>
       <option value="=<">=&lt;</option>
     </select>
-    <FormControl onChange={e => { yearOrAge = e.target.value; invokeOnChange() }} />
+    <FormControl onChange={e => { yearOrAge = parseInt(e.target.value, 10); invokeOnChange() }} />
     <select onChange={e => {gender = parseInt(e.target.value, 10); invokeOnChange() }}>
       {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
     </select>

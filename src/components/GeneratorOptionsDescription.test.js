@@ -29,10 +29,18 @@ it('renders with default test', () => {
   expect(getDescription(null)).toBe('Dowolne PESEL-e');
 });
 
+it('changin the yearOrAgeMeaning should not render text', () => {
+  expect(getDescription({
+    yearOrAgeMeaning: '>=',
+    yearOrAge: 0,
+    gender: GenderEnum.Any
+  })).toBe('Dowolne PESEL-e');
+});
+
 it('render text for only females', () => {
   expect(getDescription({
     yearOrAgeMeaning: '=',
-    yearOrAge: null,
+    yearOrAge: 0,
     gender: GenderEnum.Female
   })).toBe('Tylko PESEL-e kobiet');
 });
