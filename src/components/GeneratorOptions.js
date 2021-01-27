@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InputGroup, FormControl } from 'react-bootstrap';
 import { GenderEnum } from '../logic/genderEnum';
 
@@ -11,22 +11,32 @@ const genderOptions = [
 
 
 export default function GeneratorOptions({ onChange }) {
-  let yearOrAgeMeaning = '=';
-  let yearOrAge = 0;
-  let gender = GenderEnum.Any;
+  const [yearOrAgeMeaning, setYearOrAgeMeaning] = useState('=');
+  const [yearOrAge, setYearOrAge] = useState(0);
+  const [gender, setGender] = useState(GenderEnum.Any);
 
-  const invokeOnChange = () => onChange({ yearOrAgeMeaning: yearOrAgeMeaning, yearOrAge: yearOrAge, gender: gender});
+  const saveAndInvokeOnChange = (yearOrAgeMeaning, yearOrAge, gender) => {
+    setYearOrAgeMeaning(yearOrAgeMeaning);
+    setYearOrAge(yearOrAge);
+    setGender(gender);
+
+    onChange({
+      yearOrAgeMeaning: yearOrAgeMeaning,
+      yearOrAge: yearOrAge,
+      gender: gender
+    });
+  };
 
   return <InputGroup>
-    <select onChange={e => { yearOrAgeMeaning = e.target.value; invokeOnChange() }}>
+    <select onChange={e => saveAndInvokeOnChange(e.target.value, yearOrAge, gender) }>
       <option value="=">=</option>
       <option value=">">&gt;</option>
       <option value=">=">&gt;=</option>
       <option value="<">&lt;</option>
       <option value="=<">=&lt;</option>
     </select>
-    <FormControl onChange={e => { yearOrAge = parseInt(e.target.value, 10); invokeOnChange() }} />
-    <select onChange={e => {gender = parseInt(e.target.value, 10); invokeOnChange() }}>
+    <FormControl onChange={e => saveAndInvokeOnChange(yearOrAgeMeaning, parseInt(e.target.value, 10), gender) } />
+    <select onChange={e => saveAndInvokeOnChange(yearOrAgeMeaning, yearOrAge, parseInt(e.target.value, 10)) }>
       {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
     </select>
   </InputGroup>;
