@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { generatePESEL } from '../logic/generate';
-import { filterMerge } from '../logic/filterMerge';
-import { GenderEnum } from '../logic/genderEnum';
 import {
   Container,
   Form
 } from 'react-bootstrap';
 import GeneratorOptions from './GeneratorOptions';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
+import { generateDate } from '../logic/filterMerge';
 
 
 class App extends Component {
@@ -16,35 +16,30 @@ class App extends Component {
 
     this.state = {
       howMany: 5,
-      date_filter: '',
-      gender: GenderEnum.Any
+      pesels: []
     };
 
-    this.handleGenerateButtonClick = this.handleGenerateButtonClick.bind(this);
     this.handleGeneratorOption = this.handleGeneratorOption.bind(this);
-  }
-
-  handleGenerateButtonClick() {
-    const pesels = [...Array(this.state.howMany)]
-      .map(_ => {
-        const generatorData = filterMerge(this.state.value);
-
-        return {
-          date: generatorData.date.format('YYYY-MM-DD'),
-          pesel: generatePESEL(generatorData.date, generatorData.gender)
-        }
-      });
-
-    this.setState(state => ({
-      ...state,
-      pesels
-    }));
   }
 
   handleGeneratorOption(value) {
     this.setState(state => ({
       ...state,
-      generatorOptions: value
+      pesels: value !== null
+        ? [...Array(state.howMany)]
+          .map(_ => {
+            const date = generateDate(
+              value.dateOrAgeSign,
+              value.dateOrAge,
+              moment()
+            );
+
+            return {
+              date: date.format('YYYY-MM-DD'),
+              pesel: generatePESEL(date, value.gender)
+            };
+          })
+        : []
     }));
   }
 

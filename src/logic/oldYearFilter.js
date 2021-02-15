@@ -1,17 +1,14 @@
-import moment from 'moment';
 import momentRandom from 'moment-random';
 
-export function oldYearFilter(input, actualDate = null) {
-  const today = actualDate || moment();
-  const dateShouldBe = (input[0] === '>' || input[0] === '<') ? input[0] : '=';
-  const numericYears = (input[0] === '>' || input[0] === '<' || input[0] === '=') ? input.substring(1) : input;
+export function oldYearFilter(dateOrAgeSign, dateOrAge, actualDate = null) {
+  const dateShouldBe = (dateOrAgeSign === '>' || dateOrAgeSign === '<') ? dateOrAgeSign : '=';
 
-  if (isNaN(numericYears)) {
+  if (isNaN(dateOrAge)) {
     return null;
   }
 
-  const years = -1 * parseInt(numericYears, 10);
-  const birthDate = today.clone().add(years, 'years');
+  const years = -1 * parseInt(dateOrAge, 10);
+  const birthDate = actualDate.clone().add(years, 'years');
 
   switch(dateShouldBe)
   {
@@ -19,7 +16,7 @@ export function oldYearFilter(input, actualDate = null) {
       return momentRandom(birthDate);
 
     case '<':
-      return momentRandom(today, birthDate);
+      return momentRandom(actualDate, birthDate);
 
     default:
       return birthDate;

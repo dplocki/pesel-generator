@@ -11,32 +11,32 @@ const genderOptions = [
 
 
 export default function GeneratorOptions({ onChange }) {
-  const [yearOrAgeMeaning, setYearOrAgeMeaning] = useState('=');
-  const [yearOrAge, setYearOrAge] = useState(0);
+  const [dateOrAgeSign, setDateOrAgeSign] = useState('=');
+  const [dateOrAge, setDateOrAge] = useState(0);
   const [gender, setGender] = useState(GenderEnum.Any);
 
-  const saveAndInvokeOnChange = (yearOrAgeMeaning, yearOrAge, gender) => {
-    setYearOrAgeMeaning(yearOrAgeMeaning);
-    setYearOrAge(yearOrAge);
+  const saveAndInvokeOnChange = (dateOrAgeSign, dateOrAge, gender) => {
+    setDateOrAgeSign(dateOrAgeSign);
+    setDateOrAge(dateOrAge);
     setGender(gender);
 
-    onChange({
-      yearOrAgeMeaning: yearOrAgeMeaning,
-      yearOrAge: yearOrAge,
-      gender: gender
-    });
+    onChange((dateOrAge || dateOrAge.trim().lenght === 0)
+      ? null
+      : {
+        dateOrAgeSign: dateOrAgeSign,
+        dateOrAge: dateOrAge,
+        gender: gender
+      });
   };
 
   return <InputGroup>
-    <select onChange={e => saveAndInvokeOnChange(e.target.value, yearOrAge, gender) }>
+    <select onChange={e => saveAndInvokeOnChange(e.target.value, dateOrAge, gender)}>
       <option value="=">=</option>
       <option value=">">&gt;</option>
-      <option value=">=">&gt;=</option>
       <option value="<">&lt;</option>
-      <option value="=<">=&lt;</option>
     </select>
-    <FormControl onChange={e => saveAndInvokeOnChange(yearOrAgeMeaning, parseInt(e.target.value, 10), gender) } />
-    <select onChange={e => saveAndInvokeOnChange(yearOrAgeMeaning, yearOrAge, parseInt(e.target.value, 10)) }>
+    <FormControl onChange={e => saveAndInvokeOnChange(dateOrAgeSign, parseInt(e.target.value, 10), gender)} />
+    <select onChange={e => saveAndInvokeOnChange(dateOrAgeSign, dateOrAge, parseInt(e.target.value, 10))}>
       {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
     </select>
   </InputGroup>;
