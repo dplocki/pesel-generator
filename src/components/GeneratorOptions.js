@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InputGroup, FormControl } from 'react-bootstrap';
 import { GenderEnum } from '../logic/genderEnum';
+import { SignEnum } from '../logic/signEnum';
 
 
 const genderOptions = [
@@ -9,6 +10,11 @@ const genderOptions = [
   { value: GenderEnum.Female, label: 'Kobieta' }
 ];
 
+const signOptions = [
+  { value: SignEnum.Equal, label: '=' },
+  { value: SignEnum.Greater, label: '>' },
+  { value: SignEnum.Lesser, label: '<' },
+];
 
 export default function GeneratorOptions({ onChange }) {
   const [dateOrAgeSign, setDateOrAgeSign] = useState('=');
@@ -30,10 +36,8 @@ export default function GeneratorOptions({ onChange }) {
   };
 
   return <InputGroup>
-    <select onChange={e => saveAndInvokeOnChange(e.target.value, dateOrAge, gender)}>
-      <option value="=">=</option>
-      <option value=">">&gt;</option>
-      <option value="<">&lt;</option>
+    <select onChange={e => saveAndInvokeOnChange(parseInt(e.target.value, 10), dateOrAge, gender)}>
+      {signOptions.map(so => <option key={so.value} value={so.value}>{so.label}</option>)}
     </select>
     <FormControl onChange={e => saveAndInvokeOnChange(dateOrAgeSign, e.target.value, gender)} />
     <select onChange={e => saveAndInvokeOnChange(dateOrAgeSign, dateOrAge, parseInt(e.target.value, 10))}>

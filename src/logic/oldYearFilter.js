@@ -1,8 +1,7 @@
 import momentRandom from 'moment-random';
+import { SignEnum } from './signEnum';
 
-export function oldYearFilter(dateOrAgeSign, dateOrAge, actualDate = null) {
-  const dateShouldBe = (dateOrAgeSign === '>' || dateOrAgeSign === '<') ? dateOrAgeSign : '=';
-
+export function oldYearFilter(sign, dateOrAge, actualDate = null) {
   if (isNaN(dateOrAge)) {
     return null;
   }
@@ -10,15 +9,18 @@ export function oldYearFilter(dateOrAgeSign, dateOrAge, actualDate = null) {
   const years = -1 * parseInt(dateOrAge, 10);
   const birthDate = actualDate.clone().add(years, 'years');
 
-  switch(dateShouldBe)
+  switch(sign)
   {
-    case '>':
+    case SignEnum.Equal:
+      return birthDate;
+
+    case SignEnum.Greater:
       return momentRandom(birthDate);
 
-    case '<':
+    case SignEnum.Lesser:
       return momentRandom(actualDate, birthDate);
 
     default:
-      return birthDate;
+      throw new Error('Uknown error');
   }
 }
