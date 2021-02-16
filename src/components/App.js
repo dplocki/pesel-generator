@@ -26,7 +26,7 @@ class App extends Component {
     this.setState(state => ({
       ...state,
       pesels: value !== null
-        ? [...Array(state.howMany)]
+        ? Array(state.howMany)
           .map(_ => {
             const date = generateDate(
               value.dateOrAgeSign,

@@ -20,7 +20,7 @@ export default function GeneratorOptions({ onChange }) {
     setDateOrAge(dateOrAge);
     setGender(gender);
 
-    onChange((dateOrAge || dateOrAge.trim().lenght === 0)
+    onChange((!dateOrAge || dateOrAge.trim().lenght === 0)
       ? null
       : {
         dateOrAgeSign: dateOrAgeSign,
@@ -35,7 +35,7 @@ export default function GeneratorOptions({ onChange }) {
       <option value=">">&gt;</option>
       <option value="<">&lt;</option>
     </select>
-    <FormControl onChange={e => saveAndInvokeOnChange(dateOrAgeSign, parseInt(e.target.value, 10), gender)} />
+    <FormControl onChange={e => saveAndInvokeOnChange(dateOrAgeSign, e.target.value, gender)} />
     <select onChange={e => saveAndInvokeOnChange(dateOrAgeSign, dateOrAge, parseInt(e.target.value, 10))}>
       {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
     </select>
