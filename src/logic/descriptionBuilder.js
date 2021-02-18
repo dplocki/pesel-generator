@@ -15,7 +15,7 @@ function yearNumberToLabel(value) {
 
 export function buildDescription(options) {
   if (options.dateOrAge === 0 && options.gender === GenderEnum.Any) {
-    return DEFAULT_TEXT;
+    return null;
   }
 
   const genderLabel = {

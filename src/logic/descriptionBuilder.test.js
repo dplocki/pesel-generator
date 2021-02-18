@@ -1,15 +1,17 @@
-
+import { buildDescription } from './descriptionBuilder';
+import { SignEnum } from './signEnum';
+import { GenderEnum } from './genderEnum';
 
 it('changin the dateOrAgeSign should not render text', () => {
-  expect(getDescription({
+  expect(buildDescription({
     dateOrAgeSign: SignEnum.Greater,
     dateOrAge: 0,
     gender: GenderEnum.Any
-  })).toBe('Dowolne PESEL-e');
+  })).toBeNull();
 });
 
 it('render text for only females', () => {
-  expect(getDescription({
+  expect(buildDescription({
     dateOrAgeSign: SignEnum.Equal,
     dateOrAge: 0,
     gender: GenderEnum.Female
@@ -17,7 +19,7 @@ it('render text for only females', () => {
 });
 
 it('render text for only male older than 23', () => {
-  expect(getDescription({
+  expect(buildDescription({
     dateOrAgeSign: SignEnum.Greater,
     dateOrAge: 23,
     gender: GenderEnum.Male
@@ -25,7 +27,7 @@ it('render text for only male older than 23', () => {
 });
 
 it('render text for only females younger that one year', () => {
-  expect(getDescription({
+  expect(buildDescription({
     dateOrAgeSign: SignEnum.Lesser,
     dateOrAge: 1,
     gender: GenderEnum.Female
@@ -33,7 +35,7 @@ it('render text for only females younger that one year', () => {
 });
 
 it('render text for older or equal 34', () => {
-  expect(getDescription({
+  expect(buildDescription({
     dateOrAgeSign: SignEnum.Greater,
     dateOrAge: 34,
     gender: GenderEnum.Any
