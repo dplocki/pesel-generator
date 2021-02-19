@@ -13,6 +13,12 @@ function yearNumberToLabel(value) {
   return value + ' lat';
 }
 
+function dateToLabel(value) {
+  if (value.indexOf('/') === -1) {
+    return value + ' roku'
+  }
+}
+
 export function buildDescription(options) {
   const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
 
@@ -39,7 +45,7 @@ export function buildDescription(options) {
       [SignEnum.Greater]: 'po'
     }[options.dateOrAgeSign];
 
-    return result + ' urodzonych ' + meaningBrithLabel + ' ' + options.dateOrAge;
+    return result + ' urodzonych ' + meaningBrithLabel + ' ' + dateToLabel(options.dateOrAge);
   }
 
   const meaningLabel = {
