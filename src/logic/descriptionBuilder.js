@@ -32,6 +32,16 @@ export function buildDescription(options) {
     return result;
   }
 
+  if (options.dateOrAge.length >= 4) {
+    const meaningBrithLabel = {
+      [SignEnum.Lesser]: 'przed',
+      [SignEnum.Equal]: '',
+      [SignEnum.Greater]: 'po'
+    }[options.dateOrAgeSign];
+
+    return result + ' urodzonych ' + meaningBrithLabel + ' ' + options.dateOrAge;
+  }
+
   const meaningLabel = {
     [SignEnum.Lesser]: 'mniej niż',
     [SignEnum.Equal]: 'dokładnie',
