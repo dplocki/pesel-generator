@@ -14,7 +14,9 @@ function yearNumberToLabel(value) {
 }
 
 export function buildDescription(options) {
-  if (options.dateOrAge === 0 && options.gender === GenderEnum.Any) {
+  const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
+
+  if (isEmptyDateOrAge && options.gender === GenderEnum.Any) {
     return null;
   }
 
@@ -26,7 +28,7 @@ export function buildDescription(options) {
 
   let result = `Tylko PESEL-e ${genderLabel}`;
 
-  if (options.dateOrAge === 0) {
+  if (isEmptyDateOrAge) {
     return result;
   }
 
@@ -36,5 +38,5 @@ export function buildDescription(options) {
     [SignEnum.Greater]: 'więcej niż'
   }[options.dateOrAgeSign];
 
-  return result + ' mających ' + meaningLabel + ' ' + yearNumberToLabel(options.dateOrAge)
+  return result + ' mających ' + meaningLabel + ' ' + yearNumberToLabel(parseInt(options.dateOrAge, 10))
 }
