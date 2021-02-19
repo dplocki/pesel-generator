@@ -25,6 +25,7 @@ class App extends Component {
   handleGeneratorOption(value) {
     this.setState(state => ({
       ...state,
+      generatorOptions: value,
       pesels: value !== null
         ? Array(state.howMany)
           .map(_ => {
