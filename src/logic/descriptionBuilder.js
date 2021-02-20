@@ -13,10 +13,46 @@ function yearNumberToLabel(value) {
   return value + ' lat';
 }
 
-function dateToLabel(value) {
+function dateToLabel(sign, value) {
+  const meaningBrithLabel = {
+    [SignEnum.Lesser]: 'przed ',
+    [SignEnum.Equal]: '',
+    [SignEnum.Greater]: 'po '
+  }[sign];
+
   if (value.indexOf('/') === -1) {
-    return value + ' roku'
+    return meaningBrithLabel + value;
   }
+
+  const monthLabels = {
+    // numer, po, przed
+    1: ['stycznia', 'styczniu', 'styczniem'],
+    2: ['lutego', 'lutym', 'lutym'],
+    3: ['marca', 'marcu', 'marcem'],
+    4: ['kwietnia', 'kwietniu', 'kwietniem'],
+    5: ['maja', 'maju', 'majem'],
+    6: ['czerwca', 'czerwcu', 'czerwcem'],
+    7: ['lipca', 'lipcu', 'lipcem'],
+    8: ['sipernia', 'sierpniu', 'sierpniem'],
+    9: ['września', 'wrześniu', 'wrześniem'],
+    10: ['października', 'październiku', 'październikiem'],
+    11: ['listopada', 'listopadzie', 'listopadem'],
+    12: ['grudnia', 'grudniu', 'grudniem']
+  };
+
+  const tokens = value.split('/');
+  if (tokens.length === 2) {
+    const [month, year] = tokens;
+
+    return {
+      [SignEnum.Equal]: () => 'w ' + monthLabels[month][1],
+      [SignEnum.Greater]: () => 'po ' + monthLabels[month][1],
+      [SignEnum.Lesser]: () => 'przed ' + monthLabels[month][2],
+    }[sign]() + ' ' + year;
+  }
+
+  const [day, month, year] = tokens;
+  return `${meaningBrithLabel}${day} ${monthLabels[month][0]} ${year}`;
 }
 
 export function buildDescription(options) {
@@ -39,13 +75,7 @@ export function buildDescription(options) {
   }
 
   if (options.dateOrAge.length >= 4) {
-    const meaningBrithLabel = {
-      [SignEnum.Lesser]: 'przed',
-      [SignEnum.Equal]: '',
-      [SignEnum.Greater]: 'po'
-    }[options.dateOrAgeSign];
-
-    return result + ' urodzonych ' + meaningBrithLabel + ' ' + dateToLabel(options.dateOrAge);
+    return result + ' urodzonych ' + dateToLabel(options.dateOrAgeSign, options.dateOrAge) + ' roku';
   }
 
   const meaningLabel = {
