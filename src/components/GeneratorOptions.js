@@ -17,8 +17,8 @@ const signOptions = [
 ];
 
 export default function GeneratorOptions({ onChange }) {
-  const [dateOrAgeSign, setDateOrAgeSign] = useState('=');
-  const [dateOrAge, setDateOrAge] = useState(0);
+  const [dateOrAgeSign, setDateOrAgeSign] = useState(SignEnum.Equal);
+  const [dateOrAge, setDateOrAge] = useState('');
   const [gender, setGender] = useState(GenderEnum.Any);
 
   const saveAndInvokeOnChange = (dateOrAgeSign, dateOrAge, gender) => {

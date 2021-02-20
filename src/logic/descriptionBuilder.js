@@ -14,14 +14,14 @@ function yearNumberToLabel(value) {
 }
 
 function dateToLabel(sign, value) {
-  const meaningBrithLabel = {
-    [SignEnum.Lesser]: 'przed ',
-    [SignEnum.Equal]: '',
-    [SignEnum.Greater]: 'po '
-  }[sign];
-
   if (value.indexOf('/') === -1) {
-    return meaningBrithLabel + value;
+    const meaningBrithLabel = {
+      [SignEnum.Lesser]: ['przed ', 'rokiem'],
+      [SignEnum.Equal]: ['w ', 'roku'],
+      [SignEnum.Greater]: ['po ', 'roku']
+    }[sign];
+
+    return meaningBrithLabel[0] + value + ' ' + meaningBrithLabel[1];
   }
 
   const monthLabels = {
@@ -48,11 +48,17 @@ function dateToLabel(sign, value) {
       [SignEnum.Equal]: () => 'w ' + monthLabels[month][1],
       [SignEnum.Greater]: () => 'po ' + monthLabels[month][1],
       [SignEnum.Lesser]: () => 'przed ' + monthLabels[month][2],
-    }[sign]() + ' ' + year;
+    }[sign]() + ' ' + year + ' roku';
   }
 
+  const meaningBrithLabel = {
+    [SignEnum.Lesser]: 'przed ',
+    [SignEnum.Equal]: '',
+    [SignEnum.Greater]: 'po ',
+  }[sign];
+
   const [day, month, year] = tokens;
-  return `${meaningBrithLabel}${day} ${monthLabels[month][0]} ${year}`;
+  return `${meaningBrithLabel}${day} ${monthLabels[month][0]} ${year} roku`;
 }
 
 export function buildDescription(options) {
@@ -75,7 +81,7 @@ export function buildDescription(options) {
   }
 
   if (options.dateOrAge.length >= 4) {
-    return result + ' urodzonych ' + dateToLabel(options.dateOrAgeSign, options.dateOrAge) + ' roku';
+    return result + ' urodzonych ' + dateToLabel(options.dateOrAgeSign, options.dateOrAge);
   }
 
   const meaningLabel = {
