@@ -1,11 +1,20 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import { buildDescription } from '../logic/descriptionBuilder.js';
+import { buildDescription } from '../logic/descriptionBuilder';
+import { DEFAULT_TEXT, ERROR_TEXT } from '../logic/descriptionBuilderTexts';
 
-const DEFAULT_TEXT = 'Dowolne PESEL-e';
+function invokeBuildDescription(options) {
+  try {
+    return buildDescription(options) || DEFAULT_TEXT;
+  }
+  catch
+  {
+    return ERROR_TEXT;
+  }
+}
 
 export default function GeneratorOptionsDescription({ value }) {
   return <Form.Text className="text-muted">
-    {value ? (buildDescription(value) || DEFAULT_TEXT) : DEFAULT_TEXT}
+    {value ? invokeBuildDescription(value) : DEFAULT_TEXT}
   </Form.Text>;
 }

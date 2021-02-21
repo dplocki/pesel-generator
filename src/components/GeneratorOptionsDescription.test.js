@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ERROR_TEXT, DEFAULT_TEXT } from '../logic/descriptionBuilderTexts';
 import { GenderEnum } from '../logic/genderEnum';
 import { SignEnum } from '../logic/signEnum';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
@@ -34,7 +35,7 @@ it('renders without crashing', () => {
 });
 
 it('renders with default test', () => {
-  expect(getDescription(null)).toBe('Dowolne PESEL-e');
+  expect(getDescription(null)).toBe(DEFAULT_TEXT);
 
   expect(buildDescriptionModuleMock.buildDescription).not.toHaveBeenCalled();
 });
@@ -47,4 +48,17 @@ it('should use the descriptionBuilder during the rendering', () => {
   });
 
   expect(buildDescriptionModuleMock.buildDescription).toHaveBeenCalled();
+});
+
+it('should display error message if null is provided', () => {
+  buildDescriptionModuleMock.buildDescription = jest.fn(() => { throw new Error() });
+
+  const description = getDescription({
+    dateOrAgeSign: SignEnum.Equal,
+    dateOrAge: '????????????????',
+    gender: GenderEnum.Any
+  });
+
+  expect(buildDescriptionModuleMock.buildDescription).toHaveBeenCalled();
+  expect(description).toBe(ERROR_TEXT);
 });

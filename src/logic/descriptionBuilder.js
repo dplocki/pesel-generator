@@ -61,9 +61,20 @@ function dateToLabel(sign, value) {
   return `${meaningBrithLabel}${day} ${monthLabels[month][0]} ${year} roku`;
 }
 
-export function buildDescription(options) {
-  const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
+function areOptionsValidation(options) {
+  if (typeof options.dateOrAge !== 'string' && typeof options.dateOrAgeSign !== 'number' && typeof options.gender !== 'number') {
+    return false;
+  }
 
+  return options.dateOrAge.match(/^(\d{1,2}\/)?(\d{1,2}\/)?(\d{1,4})?$/);
+}
+
+export function buildDescription(options) {
+  if (!areOptionsValidation(options)) {
+    throw new Error('Incorrect format');
+  }
+
+  const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
   if (isEmptyDateOrAge && options.gender === GenderEnum.Any) {
     return null;
   }

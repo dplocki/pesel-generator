@@ -16,6 +16,7 @@ class App extends Component {
 
     this.state = {
       howMany: 5,
+      generatorOptions: null,
       pesels: []
     };
 

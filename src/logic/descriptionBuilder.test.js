@@ -73,3 +73,7 @@ it('render text for males born after the provided whole date', () => {
     gender: GenderEnum.Male
   })).toBe('Tylko PESEL-e mężczyzn urodzonych po 2 kwietnia 2001 roku');
 });
+
+it('incase of problem, should render error text', () => {
+  expect(() => buildDescription({}) ).toThrow();
+});
