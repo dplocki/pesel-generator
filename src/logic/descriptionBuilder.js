@@ -66,7 +66,17 @@ function areOptionsValidation(options) {
     return false;
   }
 
-  return options.dateOrAge.match(/^(\d{1,2}\/)?(\d{1,2}\/)?(\d{1,4})?$/);
+  if (options.dateOrAge.trim().length === 0) {
+    return true;
+  }
+
+  const match = options.dateOrAge.match(/^(\d{1,2}\/)?(\d{1,2}\/)?(\d{1,4})?$/);
+  if (!match) {
+    return false;
+  }
+
+  const yearOrAge = parseInt(match[3], 10);
+  return yearOrAge < 100 || yearOrAge >= 1800 && yearOrAge < 2300;
 }
 
 export function buildDescription(options) {

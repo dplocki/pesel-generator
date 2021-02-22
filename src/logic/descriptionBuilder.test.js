@@ -74,6 +74,14 @@ it('render text for males born after the provided whole date', () => {
   })).toBe('Tylko PESEL-e mężczyzn urodzonych po 2 kwietnia 2001 roku');
 });
 
-it('incase of problem, should render error text', () => {
-  expect(() => buildDescription({}) ).toThrow();
+it('incase of problem, should throw an error', () => {
+  expect(() => buildDescription({})).toThrow();
+});
+
+it('incase of incorrect year, it should throw an error', () => {
+  expect(() => buildDescription({
+    dateOrAgeSign: SignEnum.Greater,
+    dateOrAge: '1221',
+    gender: GenderEnum.Male
+  })).toThrow();
 });
