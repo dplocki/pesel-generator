@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ERROR_TEXT, DEFAULT_TEXT } from '../logic/descriptionBuilderTexts';
+import { ERROR_TEXT, DEFAULT_TEXT, INCORRECT_YEAR_TEXT } from '../logic/descriptionBuilderTexts';
 import { GenderEnum } from '../logic/genderEnum';
 import { SignEnum } from '../logic/signEnum';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
@@ -61,4 +61,17 @@ it('should display error message if null is provided', () => {
 
   expect(buildDescriptionModuleMock.buildDescription).toHaveBeenCalled();
   expect(description).toBe(ERROR_TEXT);
+});
+
+it('should display error message if inccorect year or age is provided', () => {
+  buildDescriptionModuleMock.buildDescription = jest.fn(() => { throw new TypeError() });
+
+  const description = getDescription({
+    dateOrAgeSign: SignEnum.Equal,
+    dateOrAge: '1111',
+    gender: GenderEnum.Any
+  });
+
+  expect(buildDescriptionModuleMock.buildDescription).toHaveBeenCalled();
+  expect(description).toBe(INCORRECT_YEAR_TEXT);
 });

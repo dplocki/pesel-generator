@@ -76,7 +76,11 @@ function areOptionsValidation(options) {
   }
 
   const yearOrAge = parseInt(match[3], 10);
-  return yearOrAge < 100 || yearOrAge >= 1800 && yearOrAge < 2300;
+  if (yearOrAge < 100 || yearOrAge >= 1800 && yearOrAge < 2300) {
+    return true;
+  }
+
+  throw TypeError('Incorrect year or age');
 }
 
 export function buildDescription(options) {

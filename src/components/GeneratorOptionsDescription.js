@@ -1,14 +1,17 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { buildDescription } from '../logic/descriptionBuilder';
-import { DEFAULT_TEXT, ERROR_TEXT } from '../logic/descriptionBuilderTexts';
+import { DEFAULT_TEXT, ERROR_TEXT, INCORRECT_YEAR_TEXT } from '../logic/descriptionBuilderTexts';
 
 function invokeBuildDescription(options) {
   try {
     return buildDescription(options) || DEFAULT_TEXT;
   }
-  catch
-  {
+  catch(e) {
+    if (e instanceof TypeError) {
+      return INCORRECT_YEAR_TEXT;
+    }
+
     return ERROR_TEXT;
   }
 }
