@@ -28,7 +28,7 @@ class App extends Component {
       ...state,
       generatorOptions: value,
       pesels: value !== null
-        ? Array(state.howMany)
+        ? Array.from(Array(state.howMany))
           .map(_ => {
             const date = generateDate(
               value.dateOrAgeSign,
