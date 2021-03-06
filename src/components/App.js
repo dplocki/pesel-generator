@@ -7,7 +7,8 @@ import {
 } from 'react-bootstrap';
 import GeneratorOptions from './GeneratorOptions';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
-import { generateDate } from '../logic/filterMerge';
+import { generateDate } from '../logic/generateDate';
+import { parseInput } from '../logic/parseInput';
 
 
 class App extends Component {
@@ -30,10 +31,13 @@ class App extends Component {
       pesels: value !== null
         ? Array.from(Array(state.howMany))
           .map(_ => {
+            const actualDate = moment();
+            const [startDate, endDate] = parseInput(value.dateOrAge, actualDate);
             const date = generateDate(
               value.dateOrAgeSign,
-              value.dateOrAge,
-              moment()
+              startDate,
+              endDate,
+              actualDate
             );
 
             return {
