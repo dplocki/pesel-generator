@@ -3,17 +3,6 @@ import { parseInput } from './parseInput';
 
 const currentDate = moment.utc('20200302');
 
-expect.extend({
-  isTheSame(received, excepted) {
-    const momentExcepted = moment.utc(excepted);
-    if (received.isValid() && received.isSame(momentExcepted)) {
-      return { pass: true, message: () => received.toString() };
-    }
-
-    return { pass: false, message: () => `Date don't match\n\nReceived: ${received}\nExpected: ${momentExcepted}` };
-  }
-});
-
 it('should recognize the age in input', () => {
   const [start, end] = parseInput('12', currentDate);
 
