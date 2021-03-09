@@ -17,8 +17,8 @@ it('Generate date in between given dates', () => {
 
   expect(momentRandomModuleMock).toHaveBeenCalled();
   expect(momentRandomModuleMock.mock.calls[0].length).toBe(2);
-  expect(momentRandomModuleMock.mock.calls[0][0]).toBe(startDate);
-  expect(momentRandomModuleMock.mock.calls[0][1]).toBe(endDate);
+  expect(momentRandomModuleMock.mock.calls[0][0]).toBe(endDate);
+  expect(momentRandomModuleMock.mock.calls[0][1]).toBe(startDate);
 });
 
 it('Generate date before first given date', () => {

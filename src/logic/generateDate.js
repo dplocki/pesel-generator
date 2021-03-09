@@ -4,7 +4,7 @@ import { SignEnum } from './signEnum';
 export function generateDate(sign, startDate, endDate, actualDate) {
   switch (sign) {
     case SignEnum.Equal:
-      return momentRandom(startDate, endDate);
+      return momentRandom(endDate, startDate);
 
     case SignEnum.Greater:
       return momentRandom(actualDate, endDate);
