@@ -26,13 +26,11 @@ export default function GeneratorOptions({ onChange }) {
     setDateOrAge(dateOrAge);
     setGender(gender);
 
-    onChange((!dateOrAge || dateOrAge.trim().lenght === 0)
-      ? null
-      : {
-        dateOrAgeSign: dateOrAgeSign,
-        dateOrAge: dateOrAge,
-        gender: gender
-      });
+    onChange({
+      dateOrAgeSign: dateOrAgeSign,
+      dateOrAge: dateOrAge,
+      gender: gender
+    });
   };
 
   return <InputGroup>
