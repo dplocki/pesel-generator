@@ -18,6 +18,6 @@ function invokeBuildDescription(options) {
 
 export default function GeneratorOptionsDescription({ value }) {
   return <Form.Text className="text-muted">
-    {value ? invokeBuildDescription(value) : DEFAULT_TEXT}
+    {value ? invokeBuildDescription(value) : ERROR_TEXT}
   </Form.Text>;
 }

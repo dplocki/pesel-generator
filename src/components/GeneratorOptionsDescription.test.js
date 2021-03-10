@@ -34,8 +34,8 @@ it('renders without crashing', () => {
   expect(buildDescriptionModuleMock.buildDescription).not.toHaveBeenCalled();
 });
 
-it('renders with default test', () => {
-  expect(getDescription(null)).toBe(DEFAULT_TEXT);
+it('renders with error text', () => {
+  expect(getDescription(null)).toBe(ERROR_TEXT);
 
   expect(buildDescriptionModuleMock.buildDescription).not.toHaveBeenCalled();
 });
