@@ -1,5 +1,8 @@
 export function areOptionsValid(options) {
-  if (typeof options.dateOrAge !== 'string' && typeof options.dateOrAgeSign !== 'number' && typeof options.gender !== 'number') {
+  if (!options
+      || typeof options.dateOrAge !== 'string'
+      || typeof options.dateOrAgeSign !== 'number'
+      || typeof options.gender !== 'number') {
     return false;
   }
 

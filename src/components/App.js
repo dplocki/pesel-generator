@@ -9,6 +9,9 @@ import GeneratorOptions from './GeneratorOptions';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
 import { generateDate } from '../logic/generateDate';
 import { parseInput } from '../logic/parseInput';
+import { areOptionsValid, isLogicCorrect } from '../logic/validation';
+import { GenderEnum } from '../logic/genderEnum';
+import { SignEnum } from '../logic/signEnum';
 
 
 class App extends Component {
@@ -17,7 +20,11 @@ class App extends Component {
 
     this.state = {
       howMany: 5,
-      generatorOptions: null,
+      generatorOptions: {
+        dateOrAge: '',
+        gender: GenderEnum.Any,
+        dateOrAgeSign: SignEnum.Equal
+      },
       pesels: []
     };
 
@@ -25,6 +32,15 @@ class App extends Component {
   }
 
   handleGeneratorOption(value) {
+    if (!(areOptionsValid(value) && isLogicCorrect(value))) {
+      this.setState(_ => ({
+        generatorOptions: null,
+        pesels: []
+      }));
+
+      return;
+    }
+
     this.setState(state => ({
       ...state,
       generatorOptions: value,
