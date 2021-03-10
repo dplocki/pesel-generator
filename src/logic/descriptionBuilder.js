@@ -1,6 +1,6 @@
 import { GenderEnum } from './genderEnum';
 import { SignEnum } from './signEnum';
-import { areOptionsValid } from './validation';
+import { areOptionsValid, isLogicCorrect } from './validation';
 
 function yearNumberToLabel(value) {
   if (value === 1) {
@@ -65,6 +65,10 @@ function dateToLabel(sign, value) {
 export function buildDescription(options) {
   if (!areOptionsValid(options)) {
     throw new Error('Incorrect format');
+  }
+
+  if (!isLogicCorrect(options)) {
+    throw new TypeError('Incorrect year or age');
   }
 
   const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;

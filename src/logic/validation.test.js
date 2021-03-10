@@ -1,6 +1,6 @@
 import { GenderEnum } from "./genderEnum";
 import { SignEnum } from "./signEnum";
-import { areOptionsValid } from "./validation";
+import { areOptionsValid, isLogicCorrect } from "./validation";
 
 it('should return "false" for incorrect object', () => {
   expect(areOptionsValid({})).toBeFalsy();
@@ -32,10 +32,12 @@ it('should return true for correct date format', () => {
   expect(areOptionsValid({ dateOrAge: '02/2200', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
 });
 
-it('should throw exception for incorrect date', () => {
-  expect(() => areOptionsValid({
-    dateOrAgeSign: SignEnum.Greater,
-    dateOrAge: '1221',
-    gender: GenderEnum.Male
-  })).toThrow();
+it('should check the logic of date for incorect data', () => {
+  expect(isLogicCorrect({ dateOrAgeSign: SignEnum.Greater, dateOrAge: '1221', gender: GenderEnum.Male })).toBeFalsy();
+  expect(isLogicCorrect({ dateOrAgeSign: SignEnum.Greater, dateOrAge: '111', gender: GenderEnum.Male })).toBeFalsy();
+});
+
+it('should check the logic of date for corect data', () => {
+  expect(isLogicCorrect({ dateOrAgeSign: SignEnum.Greater, dateOrAge: '1992', gender: GenderEnum.Male })).toBeTruthy();
+  expect(isLogicCorrect({ dateOrAgeSign: SignEnum.Greater, dateOrAge: '20', gender: GenderEnum.Male })).toBeTruthy();
 });
