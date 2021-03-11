@@ -2,12 +2,28 @@ import { buildDescription } from './descriptionBuilder';
 import { SignEnum } from './signEnum';
 import { GenderEnum } from './genderEnum';
 
-it('changing the dateOrAgeSign should not render text', () => {
+it('render text for people born in the future', () => {
   expect(buildDescription({
     dateOrAgeSign: SignEnum.Greater,
     dateOrAge: '',
     gender: GenderEnum.Any
-  })).toBeNull();
+  })).toBe('Tylko PESEL-e osób jeszcze nieurodzonych');
+});
+
+it('render text for people born in the past', () => {
+  expect(buildDescription({
+    dateOrAgeSign: SignEnum.Lesser,
+    dateOrAge: '',
+    gender: GenderEnum.Male
+  })).toBe('Tylko PESEL-e mężczyzn już urodzonych');
+});
+
+it('render text for people born in the past', () => {
+  expect(buildDescription({
+    dateOrAgeSign: SignEnum.Greater,
+    dateOrAge: '',
+    gender: GenderEnum.Female
+  })).toBe('Tylko PESEL-e kobiet jeszcze nieurodzonych');
 });
 
 it('render text for only females', () => {
