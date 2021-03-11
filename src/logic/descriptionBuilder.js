@@ -71,6 +71,13 @@ export function buildDescription(options) {
     throw new TypeError('Incorrect year or age');
   }
 
+  const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
+  if (isEmptyDateOrAge
+    && options.gender === GenderEnum.Any
+    && options.dateOrAgeSign === SignEnum.Equal) {
+    return null;
+  }
+
   const genderLabel = {
     [GenderEnum.Male]: 'mężczyzn',
     [GenderEnum.Female]: 'kobiet',
@@ -79,7 +86,6 @@ export function buildDescription(options) {
 
   let result = `Tylko PESEL-e ${genderLabel}`;
 
-  const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
   if (isEmptyDateOrAge) {
     switch(options.dateOrAgeSign) {
       case SignEnum.Greater:
