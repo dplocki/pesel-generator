@@ -1,6 +1,10 @@
 import moment from 'moment';
 
 export function parseInput(dateOrAge, actualDate) {
+  if (dateOrAge.length == 0) {
+    return emptyInput();
+  }
+
   if (dateOrAge.length >= 4) {
     return dateFilter(dateOrAge);
   }
@@ -40,4 +44,8 @@ function onlyYear(year) {
   const end = start.clone().add(1, 'years').add(-1, 'days');
 
   return [start, end]
+}
+
+function emptyInput() {
+  return [moment.utc('18000101'), moment.utc('23001231')];
 }
