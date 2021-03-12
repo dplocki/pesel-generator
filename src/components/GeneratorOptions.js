@@ -27,9 +27,9 @@ export default function GeneratorOptions({ onChange }) {
     setGender(gender);
 
     onChange({
-      dateOrAgeSign: dateOrAgeSign,
-      dateOrAge: dateOrAge,
-      gender: gender
+      dateOrAgeSign: +dateOrAgeSign,
+      dateOrAge: dateOrAge.trim(),
+      gender: +gender
     });
   };
 
