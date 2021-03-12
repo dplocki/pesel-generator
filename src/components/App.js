@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { generatePESEL } from '../logic/generate';
+import { generatePESEL } from '../logic/generatePESEL';
 import {
   Container,
   Form
 } from 'react-bootstrap';
 import GeneratorOptions from './GeneratorOptions';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
-import { generateDate } from '../logic/generateDate';
+import { generateDate, maxiumPESELDate, minimalPESELDate } from '../logic/generateDate';
 import { parseInput } from '../logic/parseInput';
 import { areOptionsValid, isLogicCorrect } from '../logic/validation';
 import { GenderEnum } from '../logic/genderEnum';
@@ -36,7 +36,9 @@ class App extends Component {
 
   buildMapFunction(value) {
     const actualDate = moment();
-    const [startDate, endDate] = parseInput(value.dateOrAge, actualDate);
+    const [startDate, endDate] = (value.dateOrAgeSign === SignEnum.Equal && value.dateOrAge.length === 0)
+      ? [minimalPESELDate, maxiumPESELDate]
+      : parseInput(value.dateOrAge, actualDate);
 
     return _ => {
       const date = generateDate(

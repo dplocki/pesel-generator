@@ -46,6 +46,6 @@ function onlyYear(year) {
   return [start, end]
 }
 
-function emptyInput() {
-  return [moment.utc('18000101'), moment.utc('23001231')];
+function emptyInput(actualDate) {
+  return [actualDate, actualDate];
 }
