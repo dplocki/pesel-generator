@@ -1,11 +1,15 @@
 import moment from 'moment';
-import { generateDate } from './generateDate';
+import { generateDate, maxiumPESELDate, minimalPESELDate } from './generateDate';
 import { SignEnum } from './signEnum';
 
-const startDate = moment('1995-12-23');
-const endDate = moment('1995-12-24');
-const actualDate = moment('2021-02-28');
+const startDate = moment.utc('1995-10-23');
+const endDate = moment.utc('1995-12-24');
+
 const momentRandomModuleMock = require('moment-random');
+const isNumberOfParamatersCorrect = () => momentRandomModuleMock.mock.calls[0].length == 2;
+const theRangeFrom = () => momentRandomModuleMock.mock.calls[0][1];
+const theRangeTo = () => momentRandomModuleMock.mock.calls[0][0];
+
 jest.mock('moment-random');
 
 beforeEach(() => {
@@ -13,27 +17,28 @@ beforeEach(() => {
 });
 
 it('Generate date in between given dates', () => {
-  generateDate(SignEnum.Equal, startDate, endDate, actualDate);
+  generateDate(SignEnum.Equal, startDate, endDate);
 
   expect(momentRandomModuleMock).toHaveBeenCalled();
-  expect(momentRandomModuleMock.mock.calls[0].length).toBe(2);
-  expect(momentRandomModuleMock.mock.calls[0][0]).toBe(endDate);
-  expect(momentRandomModuleMock.mock.calls[0][1]).toBe(startDate);
+  expect(isNumberOfParamatersCorrect()).toBeTruthy();
+  expect(theRangeFrom()).toBe(startDate);
+  expect(theRangeTo()).toBe(endDate);
 });
 
 it('Generate date before first given date', () => {
-  generateDate(SignEnum.Lesser, startDate, endDate, actualDate);
+  generateDate(SignEnum.Lesser, startDate, endDate);
 
   expect(momentRandomModuleMock).toHaveBeenCalled();
-  expect(momentRandomModuleMock.mock.calls[0].length).toBe(1);
-  expect(momentRandomModuleMock.mock.calls[0][0]).toBe(endDate);
+  expect(isNumberOfParamatersCorrect()).toBeTruthy();
+  expect(theRangeFrom()).toBe(minimalPESELDate);
+  expect(theRangeTo()).toBe(startDate);
 });
 
 it('Generate date after first given date', () => {
-  generateDate(SignEnum.Greater, startDate, endDate, actualDate);
+  generateDate(SignEnum.Greater, startDate, endDate);
 
   expect(momentRandomModuleMock).toHaveBeenCalled();
-  expect(momentRandomModuleMock.mock.calls[0].length).toBe(2);
-  expect(momentRandomModuleMock.mock.calls[0][0]).toBe(actualDate);
-  expect(momentRandomModuleMock.mock.calls[0][1]).toBe(endDate);
+  expect(isNumberOfParamatersCorrect()).toBeTruthy();
+  expect(theRangeFrom()).toBe(endDate);
+  expect(theRangeTo()).toBe(maxiumPESELDate);
 });
