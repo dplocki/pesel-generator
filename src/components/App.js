@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { generatePESEL } from '../logic/generate';
+import { generatePESEL } from '../logic/generatePESEL';
 import {
   Container,
   Form

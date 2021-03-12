@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { generatePESEL } from './generate';
+import { generatePESEL } from './generatePESEL';
 import { checkPESEL, characterToDigit } from './pesel';
 import { GenderEnum } from './genderEnum';
 
