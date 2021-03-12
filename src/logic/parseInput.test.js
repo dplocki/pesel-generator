@@ -6,8 +6,8 @@ const currentDate = moment.utc('20200302');
 it('should recognize the empty value', () => {
   const [start, end] = parseInput('', currentDate);
 
-  expect(start).isTheSame('18000101');
-  expect(end).isTheSame('23001231');
+  expect(start).isTheSame(currentDate);
+  expect(end).isTheSame(currentDate);
 });
 
 it('should recognize the age in input', () => {

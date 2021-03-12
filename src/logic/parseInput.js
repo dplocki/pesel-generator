@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export function parseInput(dateOrAge, actualDate) {
   if (dateOrAge.length == 0) {
-    return emptyInput();
+    return emptyInput(actualDate);
   }
 
   if (dateOrAge.length >= 4) {
