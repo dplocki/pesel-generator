@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { generatePESEL } from '../logic/generatePESEL';
+import { generatePESEL } from '../logic/generate';
 import {
   Container,
   Form
@@ -42,8 +42,7 @@ class App extends Component {
       const date = generateDate(
         value.dateOrAgeSign,
         startDate,
-        endDate,
-        actualDate
+        endDate
       );
 
       return {
