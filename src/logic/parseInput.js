@@ -13,7 +13,10 @@ export function parseInput(dateOrAge, actualDate) {
 }
 
 function dateFilter(date) {
-  const onlyDigits = date.replace(/[^0-9]/g, '');
+  const onlyDigits = date
+    .split('/')
+    .map(t => t.padStart(2, '0'))
+    .reduce((p, t) => p + t);
 
   if (onlyDigits.length === 4) {
     // Missing day and month
@@ -26,11 +29,12 @@ function dateFilter(date) {
 
     return [start, end];
   } else if (onlyDigits.length === 8) {
+    // Full date
     const result = moment.utc(onlyDigits);
     return [result, result]
   }
 
-  return null;
+  throw new Error('The input is not a date');
 }
 
 function oldYearFilter(age, actualDate) {
