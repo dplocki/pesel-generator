@@ -42,7 +42,7 @@ it('renders with error text', () => {
 
 it('should use the descriptionBuilder during the rendering', () => {
   getDescription({
-    dateOrAgeSign: SignEnum.Equal,
+    sign: SignEnum.Equal,
     dateOrAge: '12',
     gender: GenderEnum.Any
   });
@@ -54,7 +54,7 @@ it('should display error message if null is provided', () => {
   buildDescriptionModuleMock.buildDescription = jest.fn(() => { throw new Error() });
 
   const description = getDescription({
-    dateOrAgeSign: SignEnum.Equal,
+    sign: SignEnum.Equal,
     dateOrAge: '????????????????',
     gender: GenderEnum.Any
   });
@@ -67,7 +67,7 @@ it('should display error message if inccorect year or age is provided', () => {
   buildDescriptionModuleMock.buildDescription = jest.fn(() => { throw new TypeError() });
 
   const description = getDescription({
-    dateOrAgeSign: SignEnum.Equal,
+    sign: SignEnum.Equal,
     dateOrAge: '1111',
     gender: GenderEnum.Any
   });

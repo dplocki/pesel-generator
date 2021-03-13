@@ -17,17 +17,17 @@ const signOptions = [
 ];
 
 export default function GeneratorOptions({ onChange }) {
-  const [dateOrAgeSign, setDateOrAgeSign] = useState(SignEnum.Equal);
+  const [sign, setsign] = useState(SignEnum.Equal);
   const [dateOrAge, setDateOrAge] = useState('');
   const [gender, setGender] = useState(GenderEnum.Any);
 
-  const saveAndInvokeOnChange = (dateOrAgeSign, dateOrAge, gender) => {
-    setDateOrAgeSign(dateOrAgeSign);
+  const saveAndInvokeOnChange = (sign, dateOrAge, gender) => {
+    setsign(sign);
     setDateOrAge(dateOrAge);
     setGender(gender);
 
     onChange({
-      dateOrAgeSign: +dateOrAgeSign,
+      sign: +sign,
       dateOrAge: dateOrAge.trim(),
       gender: +gender
     });
@@ -37,8 +37,8 @@ export default function GeneratorOptions({ onChange }) {
     <select onChange={e => saveAndInvokeOnChange(parseInt(e.target.value, 10), dateOrAge, gender)}>
       {signOptions.map(so => <option key={so.value} value={so.value}>{so.label}</option>)}
     </select>
-    <FormControl onChange={e => saveAndInvokeOnChange(dateOrAgeSign, e.target.value, gender)} />
-    <select onChange={e => saveAndInvokeOnChange(dateOrAgeSign, dateOrAge, parseInt(e.target.value, 10))}>
+    <FormControl onChange={e => saveAndInvokeOnChange(sign, e.target.value, gender)} />
+    <select onChange={e => saveAndInvokeOnChange(sign, dateOrAge, parseInt(e.target.value, 10))}>
       {genderOptions.map(go => <option key={go.value} value={go.value}>{go.label}</option>)}
     </select>
   </InputGroup>;

@@ -3,7 +3,7 @@ const pattern = /^([1-9]\d{0,3})(\/([1-9]{1,2}|0\d))?(\/([1-9]{1,2}|0\d))?$/;
 export function areOptionsValid(options) {
   if (!options
       || typeof options.dateOrAge !== 'string'
-      || typeof options.dateOrAgeSign !== 'number'
+      || typeof options.sign !== 'number'
       || typeof options.gender !== 'number') {
     return false;
   }

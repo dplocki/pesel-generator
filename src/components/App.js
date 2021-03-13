@@ -22,7 +22,7 @@ class App extends Component {
     const startingOptions = {
       dateOrAge: '',
       gender: GenderEnum.Any,
-      dateOrAgeSign: SignEnum.Equal
+      sign: SignEnum.Equal
     };
 
     this.state = {
@@ -36,13 +36,13 @@ class App extends Component {
 
   buildMapFunction(value) {
     const actualDate = moment.utc();
-    const [startDate, endDate] = (value.dateOrAgeSign === SignEnum.Equal && value.dateOrAge.length === 0)
+    const [startDate, endDate] = (value.sign === SignEnum.Equal && value.dateOrAge.length === 0)
       ? [minimalPESELDate, maxiumPESELDate]
       : parseInput(value.dateOrAge, actualDate);
 
     return _ => {
       const date = generateDate(
-        value.dateOrAgeSign,
+        value.sign,
         startDate,
         endDate
       );

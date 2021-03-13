@@ -74,7 +74,7 @@ export function buildDescription(options) {
   const isEmptyDateOrAge = options.dateOrAge.trim().length === 0;
   if (isEmptyDateOrAge
     && options.gender === GenderEnum.Any
-    && options.dateOrAgeSign === SignEnum.Equal) {
+    && options.sign === SignEnum.Equal) {
     return null;
   }
 
@@ -87,7 +87,7 @@ export function buildDescription(options) {
   let result = `Tylko PESEL-e ${genderLabel}`;
 
   if (isEmptyDateOrAge) {
-    switch(options.dateOrAgeSign) {
+    switch(options.sign) {
       case SignEnum.Greater:
         return result + ' jeszcze nieurodzonych';
 
@@ -100,14 +100,14 @@ export function buildDescription(options) {
   }
 
   if (options.dateOrAge.length >= 4) {
-    return result + ' urodzonych ' + dateToLabel(options.dateOrAgeSign, options.dateOrAge);
+    return result + ' urodzonych ' + dateToLabel(options.sign, options.dateOrAge);
   }
 
   const meaningLabel = {
     [SignEnum.Lesser]: 'mniej niż',
     [SignEnum.Equal]: 'dokładnie',
     [SignEnum.Greater]: 'więcej niż'
-  }[options.dateOrAgeSign];
+  }[options.sign];
 
   return result + ' mających ' + meaningLabel + ' ' + yearNumberToLabel(parseInt(options.dateOrAge, 10))
 }
