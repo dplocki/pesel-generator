@@ -43,7 +43,7 @@ function dateToLabel(sign, value) {
 
   const tokens = value.split('/');
   if (tokens.length === 2) {
-    const [month, year] = tokens;
+    const [year, month] = tokens;
 
     return {
       [SignEnum.Equal]: () => 'w ' + monthLabels[month][1],
@@ -58,7 +58,7 @@ function dateToLabel(sign, value) {
     [SignEnum.Greater]: 'po ',
   }[sign];
 
-  const [day, month, year] = tokens;
+  const [year, month, day] = tokens;
   return `${meaningBrithLabel}${day} ${monthLabels[month][0]} ${year} roku`;
 }
 

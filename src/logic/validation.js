@@ -1,3 +1,5 @@
+const pattern = /^([1-9]\d{0,3})(\/([1-9]{1,2}|0\d))?(\/([1-9]{1,2}|0\d))?$/;
+
 export function areOptionsValid(options) {
   if (!options
       || typeof options.dateOrAge !== 'string'
@@ -6,7 +8,7 @@ export function areOptionsValid(options) {
     return false;
   }
 
-  return !!options.dateOrAge.match(/^((\d{1,2}\/)?(\d{1,2}\/)?(\d{1,4})?|)$/);
+  return options.dateOrAge.length === 0 || options.dateOrAge.match(pattern);
 }
 
 export function isLogicCorrect(options) {
@@ -14,8 +16,8 @@ export function isLogicCorrect(options) {
     return true;
   }
 
-  const match = options.dateOrAge.match(/^(\d{1,2}\/)?(\d{1,2}\/)?(\d{1,4})?$/);
-  const yearOrAge = parseInt(match[3], 10);
+  const match = options.dateOrAge.match(pattern);
+  const yearOrAge = parseInt(match[1], 10);
 
   return yearOrAge < 100 || yearOrAge >= 1800 && yearOrAge < 2300;
 }

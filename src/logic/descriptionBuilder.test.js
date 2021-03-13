@@ -77,7 +77,7 @@ it('render text for born after the provided year', () => {
 it('render text for born after the provided month and year', () => {
   expect(buildDescription({
     dateOrAgeSign: SignEnum.Lesser,
-    dateOrAge: '5/1983',
+    dateOrAge: '1983/5',
     gender: GenderEnum.Female
   })).toBe('Tylko PESEL-e kobiet urodzonych przed majem 1983 roku');
 });
@@ -85,7 +85,7 @@ it('render text for born after the provided month and year', () => {
 it('render text for male born in the provided whole date', () => {
   expect(buildDescription({
     dateOrAgeSign: SignEnum.Equal,
-    dateOrAge: '12/3/1983',
+    dateOrAge: '1983/3/12',
     gender: GenderEnum.Male
   })).toBe('Tylko PESEL-e mężczyzn urodzonych 12 marca 1983 roku');
 });
@@ -93,7 +93,7 @@ it('render text for male born in the provided whole date', () => {
 it('render text for males born after the provided whole date', () => {
   expect(buildDescription({
     dateOrAgeSign: SignEnum.Greater,
-    dateOrAge: '2/4/2001',
+    dateOrAge: '2001/4/2',
     gender: GenderEnum.Male
   })).toBe('Tylko PESEL-e mężczyzn urodzonych po 2 kwietnia 2001 roku');
 });

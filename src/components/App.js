@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   buildMapFunction(value) {
-    const actualDate = moment();
+    const actualDate = moment.utc();
     const [startDate, endDate] = (value.dateOrAgeSign === SignEnum.Equal && value.dateOrAge.length === 0)
       ? [minimalPESELDate, maxiumPESELDate]
       : parseInput(value.dateOrAge, actualDate);
@@ -48,7 +48,7 @@ class App extends Component {
       );
 
       return {
-        date: date.format('YYYY-MM-DD'),
+        date: date.format('YYYY/MM/DD'),
         pesel: generatePESEL(date, value.gender)
       };
     }

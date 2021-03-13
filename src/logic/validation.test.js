@@ -10,26 +10,24 @@ it('should return "false" for incorrect object', () => {
 });
 
 it('should return true for data without date or age input', () => {
-  expect(areOptionsValid({
-    dateOrAge: '',
-    gender: GenderEnum.Any,
-    dateOrAgeSign: SignEnum.Equal
-  })).toBeTruthy();
+  expect(areOptionsValid({ dateOrAge: '', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
 });
 
 it('should return false for incorrect date format', () => {
   expect(areOptionsValid({ dateOrAge: 'xcmvxcmv', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeFalsy();
   expect(areOptionsValid({ dateOrAge: '23.23.232', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeFalsy();
   expect(areOptionsValid({ dateOrAge: '1999.02.21', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeFalsy();
-  expect(areOptionsValid({ dateOrAge: '1999/02/21', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeFalsy();
+  expect(areOptionsValid({ dateOrAge: '02/03/1945', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeFalsy();
   expect(areOptionsValid({ dateOrAge: '232323', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeFalsy();
 });
 
 it('should return true for correct date format', () => {
-  expect(areOptionsValid({ dateOrAge: '10', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
+  expect(areOptionsValid({ dateOrAge: '1', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
+  expect(areOptionsValid({ dateOrAge: '20', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
   expect(areOptionsValid({ dateOrAge: '1802', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
-  expect(areOptionsValid({ dateOrAge: '02/03/1945', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
-  expect(areOptionsValid({ dateOrAge: '02/2200', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
+  expect(areOptionsValid({ dateOrAge: '2200/02', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
+  expect(areOptionsValid({ dateOrAge: '1945/3', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
+  expect(areOptionsValid({ dateOrAge: '1999/02/21', gender: GenderEnum.Any, dateOrAgeSign: SignEnum.Equal })).toBeTruthy();
 });
 
 it('should check the logic of date for incorect data', () => {
