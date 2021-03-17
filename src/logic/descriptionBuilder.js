@@ -41,7 +41,7 @@ function dateToLabel(sign, value) {
     12: ['grudnia', 'grudniu', 'grudniem']
   };
 
-  const tokens = value.split('/');
+  const tokens = value.split('/').map(t => parseInt(t, 10));
   if (tokens.length === 2) {
     const [year, month] = tokens;
 
