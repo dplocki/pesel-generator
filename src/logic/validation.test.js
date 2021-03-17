@@ -31,12 +31,12 @@ it('should return true for correct date format', () => {
   expect(areOptionsValid({ dateOrAge: '1999/02/1', gender: GenderEnum.Any, sign: SignEnum.Equal })).toBeTruthy();
 });
 
-it('should check the logic of date for incorect data', () => {
+it('should check the logic of date for incorrect data', () => {
   expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '1221', gender: GenderEnum.Male })).toBeFalsy();
   expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '111', gender: GenderEnum.Male })).toBeFalsy();
 });
 
-it('should check the logic of date for corect data', () => {
+it('should check the logic of date for correct data', () => {
   expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '1992', gender: GenderEnum.Male })).toBeTruthy();
   expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '20', gender: GenderEnum.Male })).toBeTruthy();
 });

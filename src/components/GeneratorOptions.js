@@ -17,12 +17,12 @@ const signOptions = [
 ];
 
 export default function GeneratorOptions({ onChange }) {
-  const [sign, setsign] = useState(SignEnum.Equal);
+  const [sign, setSign] = useState(SignEnum.Equal);
   const [dateOrAge, setDateOrAge] = useState('');
   const [gender, setGender] = useState(GenderEnum.Any);
 
   const saveAndInvokeOnChange = (sign, dateOrAge, gender) => {
-    setsign(sign);
+    setSign(sign);
     setDateOrAge(dateOrAge);
     setGender(gender);
 

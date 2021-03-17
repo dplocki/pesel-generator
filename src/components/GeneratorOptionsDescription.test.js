@@ -63,7 +63,7 @@ it('should display error message if null is provided', () => {
   expect(description).toBe(ERROR_TEXT);
 });
 
-it('should display error message if inccorect year or age is provided', () => {
+it('should display error message if incorrect year or age is provided', () => {
   buildDescriptionModuleMock.buildDescription = jest.fn(() => { throw new TypeError() });
 
   const description = getDescription({

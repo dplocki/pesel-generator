@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import GeneratorOptions from './GeneratorOptions';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
-import { generateDate, maxiumPESELDate, minimalPESELDate } from '../logic/generateDate';
+import { generateDate, maximumPESELDate as maximumPESELDate, minimalPESELDate } from '../logic/generateDate';
 import { parseInput } from '../logic/parseInput';
 import { areOptionsValid, isLogicCorrect } from '../logic/validation';
 import { GenderEnum } from '../logic/genderEnum';
@@ -37,7 +37,7 @@ class App extends Component {
   buildMapFunction(value) {
     const actualDate = moment.utc();
     const [startDate, endDate] = (value.sign === SignEnum.Equal && value.dateOrAge.length === 0)
-      ? [minimalPESELDate, maxiumPESELDate]
+      ? [minimalPESELDate, maximumPESELDate]
       : parseInput(value.dateOrAge, actualDate);
 
     return _ => {

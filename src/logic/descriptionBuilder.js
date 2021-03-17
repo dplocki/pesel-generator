@@ -16,13 +16,13 @@ function yearNumberToLabel(value) {
 
 function dateToLabel(sign, value) {
   if (value.indexOf('/') === -1) {
-    const meaningBrithLabel = {
+    const meaningBirthLabel = {
       [SignEnum.Lesser]: ['przed ', 'rokiem'],
       [SignEnum.Equal]: ['w ', 'roku'],
       [SignEnum.Greater]: ['po ', 'roku']
     }[sign];
 
-    return meaningBrithLabel[0] + value + ' ' + meaningBrithLabel[1];
+    return meaningBirthLabel[0] + value + ' ' + meaningBirthLabel[1];
   }
 
   const monthLabels = {
@@ -52,14 +52,14 @@ function dateToLabel(sign, value) {
     }[sign]() + ' ' + year + ' roku';
   }
 
-  const meaningBrithLabel = {
+  const meaningBirthLabel = {
     [SignEnum.Lesser]: 'przed ',
     [SignEnum.Equal]: '',
     [SignEnum.Greater]: 'po ',
   }[sign];
 
   const [year, month, day] = tokens;
-  return `${meaningBrithLabel}${day} ${monthLabels[month][0]} ${year} roku`;
+  return `${meaningBirthLabel}${day} ${monthLabels[month][0]} ${year} roku`;
 }
 
 export function buildDescription(options) {

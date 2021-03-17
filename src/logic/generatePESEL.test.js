@@ -51,7 +51,7 @@ it('generated PESEL should be valid one', () => {
 });
 
 it('generated PESEL should have proper gender encoded', () => {
-  function get10thDigithOfGeneratedPESEL(date, gender) {
+  function get10thDigitsOfGeneratedPESEL(date, gender) {
     const pesel = generatePESEL(moment(date), gender);
     const _10thDigit = pesel.substring(10, 0);
 
@@ -60,8 +60,8 @@ it('generated PESEL should have proper gender encoded', () => {
     return characterToDigit(_10thDigit);
   }
 
-  expect(get10thDigithOfGeneratedPESEL('19230212', GenderEnum.Male) % 2).toBe(1);
-  expect(get10thDigithOfGeneratedPESEL('19230212', GenderEnum.Female) % 2).toBe(0);
+  expect(get10thDigitsOfGeneratedPESEL('19230212', GenderEnum.Male) % 2).toBe(1);
+  expect(get10thDigitsOfGeneratedPESEL('19230212', GenderEnum.Female) % 2).toBe(0);
 });
 
 it('generator should produce not the same PESEL-s for the same date', () => {
