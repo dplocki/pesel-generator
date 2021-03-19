@@ -38,8 +38,10 @@ function dateFilter(date) {
 }
 
 function oldYearFilter(age, actualDate) {
-  const years = -1 * age;
-  return onlyYear(actualDate.clone().add(years, 'years').year());
+  return [
+      actualDate.clone().add(-1 * age - 1, 'years'),
+      actualDate.clone().add(-1 * age, 'years')
+    ];
 }
 
 function onlyYear(year) {

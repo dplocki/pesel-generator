@@ -13,8 +13,8 @@ it('should recognize the empty value', () => {
 it('should recognize the age in input', () => {
   const [start, end] = parseInput('12', currentDate);
 
-  expect(start).isTheSame('20080101');
-  expect(end).isTheSame('20081231');
+  expect(start).isTheSame('20070302');
+  expect(end).isTheSame('20080302');
 });
 
 it('should recognize the single year in input', () => {
