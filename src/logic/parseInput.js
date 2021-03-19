@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export function parseInput(dateOrAge, actualDate) {
-  if (dateOrAge.length == 0) {
+  if (dateOrAge.length === 0) {
     return emptyInput(actualDate);
   }
 
@@ -38,9 +38,11 @@ function dateFilter(date) {
 }
 
 function oldYearFilter(age, actualDate) {
+  const endDate = actualDate.clone().add(-1 * age, 'years');
+
   return [
-      actualDate.clone().add(-1 * age - 1, 'years'),
-      actualDate.clone().add(-1 * age, 'years')
+      endDate.clone().add(- 1, 'years'),
+      endDate
     ];
 }
 
