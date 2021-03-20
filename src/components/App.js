@@ -65,7 +65,9 @@ class App extends Component {
     this.setState(state => ({
       ...state,
       generatorOptions: value,
-      pesels: this.generatePESELs(value, state.howMany)
+      pesels: areOptionsValid(value) && isLogicCorrect(value)
+        ? this.generatePESELs(value, state.howMany)
+        : []
     }));
   }
 
