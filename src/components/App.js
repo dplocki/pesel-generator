@@ -62,15 +62,6 @@ class App extends Component {
   }
 
   handleGeneratorOption(value) {
-    if (!areOptionsValid(value) || !isLogicCorrect(value)) {
-      this.setState(_ => ({
-        generatorOptions: null,
-        pesels: []
-      }));
-
-      return;
-    }
-
     this.setState(state => ({
       ...state,
       generatorOptions: value,
