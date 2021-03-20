@@ -34,6 +34,8 @@ it('should return true for correct date format', () => {
 it('should check the logic of date for incorrect data', () => {
   expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '1221', gender: GenderEnum.Male })).toBeFalsy();
   expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '111', gender: GenderEnum.Male })).toBeFalsy();
+  expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '1992/23', gender: GenderEnum.Male })).toBeFalsy();
+  expect(isLogicCorrect({ sign: SignEnum.Greater, dateOrAge: '1992/02/41', gender: GenderEnum.Male })).toBeFalsy();
 });
 
 it('should check the logic of date for correct data', () => {
