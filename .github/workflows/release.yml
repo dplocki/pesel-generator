@@ -1,0 +1,34 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      v\d+\.\d+\.\d+
+
+jobs:
+  tagged-release:
+
+    runs-on:
+      ubuntu-latest
+
+    steps:
+      - name: "Getting the sources"
+        uses: actions/checkout@v2
+
+      - name: "Build"
+        run: |
+          npm install
+          npm run build --prod
+
+      - name: "Create package"
+        run: |
+          cd build
+          zip -r ../${GITHUB_REF#refs/tags/}.zip *
+          cd ..
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            *.zip
