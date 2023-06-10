@@ -19,14 +19,21 @@ The applications is using [Boostrap](https://getbootstrap.com/), in form of Reac
 
 ## Runnig test
 
-```bash
+```sh
 npm run test
 ```
 
 ## Building
 
-```bash
+```sh
 npm run build
 ```
 
 See the `./build` directory.
+
+## Docker image
+
+```sh
+docker build -t pesel-generator .
+docker run -p 127.0.0.1:3000:3000 pesel-generator
+```
