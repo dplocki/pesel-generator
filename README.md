@@ -17,7 +17,7 @@ You can find the most recent version of the Create React App guide [here](https:
 
 The applications is using [Boostrap](https://getbootstrap.com/), in form of React components: [react-bootstrap](https://react-bootstrap.github.io/).
 
-## Runnig test
+## Running test
 
 ```sh
 npm run test
@@ -35,5 +35,5 @@ See the `./build` directory.
 
 ```sh
 docker build -t pesel-generator .
-docker run -p 127.0.0.1:3000:3000 pesel-generator
+docker run -p 127.0.0.1:3000:3000 -v $(pwd):/build pesel-generator
 ```
