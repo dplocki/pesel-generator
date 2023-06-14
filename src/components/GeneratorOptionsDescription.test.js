@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { ERROR_TEXT, DEFAULT_TEXT, INCORRECT_YEAR_TEXT } from '../logic/descriptionBuilderTexts';
+import { render } from '@testing-library/react'
+import { ERROR_TEXT, INCORRECT_YEAR_TEXT } from '../logic/descriptionBuilderTexts';
 import { GenderEnum } from '../logic/genderEnum';
 import { SignEnum } from '../logic/signEnum';
 import GeneratorOptionsDescription from './GeneratorOptionsDescription';
@@ -9,27 +9,18 @@ const buildDescriptionModuleMock = require('../logic/descriptionBuilder');
 
 jest.mock('../logic/descriptionBuilder');
 
-let container;
-
 function getDescription(options) {
-  ReactDOM.render(<GeneratorOptionsDescription value={options} />, container);
+  const { container} = render(<GeneratorOptionsDescription value={options} />);
+
   return container.querySelector('.text-muted').textContent;
 }
 
 beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
   buildDescriptionModuleMock.buildDescription.mockClear();
 });
 
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
 it('renders without crashing', () => {
-  ReactDOM.render(<GeneratorOptionsDescription />, container);
-  ReactDOM.unmountComponentAtNode(container);
+  render(<GeneratorOptionsDescription />);
 
   expect(buildDescriptionModuleMock.buildDescription).not.toHaveBeenCalled();
 });
