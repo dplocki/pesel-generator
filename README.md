@@ -35,5 +35,5 @@ See the `./build` directory.
 
 ```sh
 docker build -t pesel-generator .
-docker run -p 127.0.0.1:3000:3000 -v $(pwd):/build pesel-generator
+docker run --rm -it -p 127.0.0.1:3000:3000 -v $(pwd):/build pesel-generator
 ```
