@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 expect.extend({
-  isTheSame(received, excepted) {
+  toBeTheSameAs(received, excepted) {
     const momentExcepted = moment.utc(excepted);
     if (received.isValid() && received.isSame(momentExcepted)) {
       return { pass: true, message: () => `Dates match (${received})` };
