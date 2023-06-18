@@ -2,6 +2,10 @@ import moment from 'moment';
 import momentRandom from 'moment-random';
 import { SignEnum } from './signEnum';
 
+function dateToEpoch(date) {
+  return Math.floor(date.getTime() / 1000);
+}
+
 export const minimalPESELDate = moment.utc('18000101');
 export const maximumPESELDate = moment.utc('23001231');
 

@@ -1,12 +1,11 @@
-import moment from 'moment';
+const isSameDay = require('date-fns/isSameDay')
 
 expect.extend({
   toBeTheSameAs(received, excepted) {
-    const momentExcepted = moment.utc(excepted);
-    if (received.isValid() && received.isSame(momentExcepted)) {
+    if (isSameDay(received, excepted)) {
       return { pass: true, message: () => `Dates match (${received})` };
     }
 
-    return { pass: false, message: () => `Date don't match\n\nReceived: ${received}\nExpected: ${momentExcepted}` };
+    return { pass: false, message: () => `Date don't match\n\nReceived: ${received}\nExpected: ${excepted}` };
   }
 });

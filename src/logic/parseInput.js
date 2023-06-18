@@ -1,4 +1,7 @@
-import moment from 'moment';
+const subDays = require('date-fns/subDays');
+const addMonths = require('date-fns/addMonths');
+const addYears = require('date-fns/addYears');
+const subYears = require('date-fns/subYears');
 
 export function parseInput(dateOrAge, actualDate) {
   if (dateOrAge.length === 0) {
@@ -12,6 +15,8 @@ export function parseInput(dateOrAge, actualDate) {
   return oldYearFilter(dateOrAge, actualDate);
 }
 
+const cloneDate = (date) => new Date(date.getTime())
+
 function dateFilter(date) {
   const onlyDigits = date
     .split('/')
@@ -23,14 +28,19 @@ function dateFilter(date) {
     return onlyYear(parseInt(onlyDigits, 10));
   } else if (onlyDigits.length === 6) {
     // Missing day number
-    const newInput = onlyDigits + '01';
-    const start = moment.utc(newInput);
-    const end = start.clone().add(1, 'months').add(-1, 'days');
+    const year = parseInt(onlyDigits.substring(0, 4), 10);
+    const month = parseInt(onlyDigits.substring(4, 6), 10);
+    const start = new Date(Date.UTC(year, month - 1, 1));
+    const end = subDays(addMonths(start, 1), 1);
 
     return [start, end];
   } else if (onlyDigits.length === 8) {
     // Full date
-    const result = moment.utc(onlyDigits);
+    const year = parseInt(onlyDigits.substring(0, 4), 10);
+    const month = parseInt(onlyDigits.substring(4, 6), 10);
+    const day = parseInt(onlyDigits.substring(6, 8), 10);
+
+    const result = new Date(Date.UTC(year, month - 1, day));
     return [result, result]
   }
 
@@ -38,22 +48,21 @@ function dateFilter(date) {
 }
 
 function oldYearFilter(age, actualDate) {
-  const endDate = actualDate.clone().add(-1 * age, 'years');
+  const endDate = subYears(actualDate, age);
 
   return [
-      endDate.clone().add(- 1, 'years'),
+      subYears(endDate, 1),
       endDate
     ];
 }
 
 function onlyYear(year) {
-  const newInput = year + '0101';
-  const start = moment.utc(newInput);
-  const end = start.clone().add(1, 'years').add(-1, 'days');
+  const start = new Date(Date.UTC(year, 0, 1, 0, 0 , 0, 0));
+  const end = subDays(addYears(start, 1), 1);
 
   return [start, end]
 }
 
 function emptyInput(actualDate) {
-  return [actualDate, actualDate];
+  return [cloneDate(actualDate), cloneDate(actualDate)];
 }
