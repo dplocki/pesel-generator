@@ -9,3 +9,5 @@ expect.extend({
     return { pass: false, message: () => `Date don't match\n\nReceived: ${received}\nExpected: ${excepted}` };
   }
 });
+
+const toDate = (excepted) => parse(excepted + ':000000', 'yyyyMMdd:HHmmss', new Date());

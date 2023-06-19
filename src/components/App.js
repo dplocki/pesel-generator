@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { generatePESEL } from '../logic/generatePESEL';
 import {
   Container,
@@ -12,6 +11,7 @@ import { parseInput } from '../logic/parseInput';
 import { areOptionsValid, isLogicCorrect } from '../logic/validation';
 import { GenderEnum } from '../logic/genderEnum';
 import { SignEnum } from '../logic/signEnum';
+import { format } from 'date-fns';
 
 const PESELS_NUMBER = 5;
 
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   buildMapFunction(value) {
-    const actualDate = moment.utc();
+    const actualDate = new Date();
     const [startDate, endDate] = (value.sign === SignEnum.Equal && value.dateOrAge.length === 0)
       ? [minimalPESELDate, maximumPESELDate]
       : parseInput(value.dateOrAge, actualDate);
@@ -48,7 +48,7 @@ class App extends Component {
       );
 
       return {
-        date: date.format('YYYY/MM/DD'),
+        date: format(date, 'yyyy/MM/dd'),
         pesel: generatePESEL(date, value.gender)
       };
     }

@@ -1,9 +1,10 @@
 import { calculateControlDigit } from './pesel';
 import { GenderEnum } from './genderEnum';
+import { format } from 'date-fns';
 
 export function generatePESEL(date, gender = 'any') {
-  const year = date.year();
-  let result = date.format('YYMMDD');
+  const year = date.getFullYear();
+  let result = format(date, 'yyMMdd');
 
   if (year > 1799 && year < 1900) {
     result = addToMonth(result, 80);

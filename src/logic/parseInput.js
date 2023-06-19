@@ -1,7 +1,4 @@
-const subDays = require('date-fns/subDays');
-const addMonths = require('date-fns/addMonths');
-const addYears = require('date-fns/addYears');
-const subYears = require('date-fns/subYears');
+const { subDays, addMonths, addYears, subYears } = require('date-fns');
 
 export function parseInput(dateOrAge, actualDate) {
   if (dateOrAge.length === 0) {
@@ -15,13 +12,15 @@ export function parseInput(dateOrAge, actualDate) {
   return oldYearFilter(dateOrAge, actualDate);
 }
 
-const cloneDate = (date) => new Date(date.getTime())
-
-function dateFilter(date) {
-  const onlyDigits = date
+function cleanDigits(value) {
+  return value
     .split('/')
     .map(t => t.padStart(2, '0'))
     .reduce((p, t) => p + t);
+}
+
+function dateFilter(date) {
+  const onlyDigits = cleanDigits(date);
 
   if (onlyDigits.length === 4) {
     // Missing day and month
@@ -62,6 +61,8 @@ function onlyYear(year) {
 
   return [start, end]
 }
+
+const cloneDate = (date) => new Date(date.getTime());
 
 function emptyInput(actualDate) {
   return [cloneDate(actualDate), cloneDate(actualDate)];
